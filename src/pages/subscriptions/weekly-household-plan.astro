@@ -1,0 +1,29 @@
+---
+import SubscriptionPlanDetail from '../../components/SubscriptionPlanDetail.astro';
+---
+
+<SubscriptionPlanDetail
+	planName="Weekly Household Plan"
+	planSlug="weekly-household-plan"
+	monthlyPrice="$149"
+	includedPounds="85 lb/month"
+	overageRate="$1.75/lb"
+	idealFor="Couples, small households, and regular weekly laundry users"
+	description="A dependable household plan for regular pickup schedules and predictable monthly costs."
+	canonicalPath="/subscriptions/weekly-household-plan"
+	highlights={[
+		'Built for couples and small households with recurring laundry needs.',
+		'Includes a larger monthly allowance for weekly laundry loads.',
+		'Helps you save more than one-off pickups while keeping service simple.'
+	]}
+	howItWorks={[
+		'Set a recurring pickup schedule for the week that works best.',
+		'Leave your laundry out and we process it on your route day.',
+		'Any extra pounds beyond your monthly allowance are billed at the overage rate.'
+	]}
+	whoItFits={[
+		'Couples who want an easier weekly routine.',
+		'Small households with regular laundry volume.',
+		'Customers who want consistent, recurring service without a high-volume plan.'
+	]}
+/>

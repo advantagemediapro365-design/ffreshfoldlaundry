@@ -1,0 +1,234 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+	canonicalPath?: string;
+	noindex?: boolean;
+}
+
+const {
+	title = 'Laundry Pickup & Delivery in Central PA | Fresh Fold Laundry Delivery Altoona',
+	description = 'Fresh Fold Laundry Delivery Altoona offers laundry pickup and delivery from Altoona to Lock Haven, including wash, dry, fold, subscriptions, and commercial laundry service.',
+	canonicalPath = Astro.url.pathname,
+	noindex = false,
+} = Astro.props;
+
+const siteUrl = 'https://freshfolddelivery.com';
+const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
+const schema = {
+	'@context': 'https://schema.org',
+	'@type': 'LocalBusiness',
+	name: 'Fresh Fold Laundry Delivery Altoona',
+	url: siteUrl,
+	telephone: '+1-570-494-7523',
+	email: 'info@freshfoldaltoona.com',
+	areaServed: ['Altoona PA', 'State College PA', 'Lock Haven PA', 'Blair County PA', 'Central Pennsylvania'],
+	contactPoint: { '@type': 'ContactPoint', telephone: '+1-570-494-7523', email: 'info@freshfoldaltoona.com', contactType: 'customer service' },
+	description,
+	priceRange: '$$',
+	sameAs: [],
+};
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
+		{noindex && <meta name="robots" content="noindex,follow" />}
+		<meta property="og:site_name" content="Fresh Fold Laundry Delivery Altoona" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta name="twitter:card" content="summary" />
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+		<style>
+			/* Skip Link for Accessibility */
+			.skip-link {
+				position: absolute;
+				top: -40px;
+				left: 0;
+				background: #0066a1;
+				color: white;
+				padding: 8px;
+				text-decoration: none;
+				z-index: 100;
+			}
+			.skip-link:focus {
+				top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="#main-content" class="skip-link">Skip to main content</a>
+		<Header />
+		<main id="main-content">
+			<slot />
+		</main>
+		<Footer />
+		<a
+			href="https://wa.me/15704947523?text=Hi%20Fresh%20Fold%20Delivery%2C%20I%20would%20like%20to%20connect%20with%20you%20about%20laundry%20service."
+			class="whatsapp-float"
+			aria-label="Contact us on WhatsApp"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<span aria-hidden="true">💬</span>
+			<span class="whatsapp-label">WhatsApp</span>
+		</a>
+		<a href="tel:+15704947523" class="call-float" aria-label="Call Fresh Fold Laundry Delivery Altoona"><span aria-hidden="true">☎</span><span>Call us</span></a>
+	</body>
+</html>
+
+<style is:global>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	html,
+	body {
+		width: 100%;
+		height: 100%;
+		font-family: 'Inter', sans-serif;
+		color: #333;
+		line-height: 1.6;
+	}
+
+	body {
+		background-color: #ffffff;
+	}
+
+	main {
+		min-height: calc(100vh - 200px);
+	}
+
+	/* Colors */
+	:root {
+		--primary: #0066a1;
+		--secondary: #00a0c6;
+		--dark: #001f3f;
+		--light: #f0f4f8;
+		--text: #333;
+		--border: #e0e0e0;
+	}
+
+	/* Typography */
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	h1 {
+		font-size: 2.5rem;
+	}
+
+	h2 {
+		font-size: 2rem;
+	}
+
+	h3 {
+		font-size: 1.5rem;
+	}
+
+	/* Buttons */
+	button, .btn {
+		padding: 12px 24px;
+		border: none;
+		border-radius: 6px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		font-size: 1rem;
+	}
+
+	.btn-primary {
+		background-color: var(--secondary);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		background-color: var(--primary);
+	}
+
+	.btn-secondary {
+		background-color: white;
+		color: var(--secondary);
+		border: 2px solid var(--secondary);
+	}
+
+	.btn-secondary:hover {
+		background-color: var(--secondary);
+		color: white;
+	}
+
+	/* Container */
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	/* Sections */
+	section {
+		padding: 60px 0;
+	}
+
+	/* Images */
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.whatsapp-float {
+		position: fixed;
+		bottom: 24px;
+		right: 24px;
+		z-index: 1000;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		background: #25d366;
+		color: #ffffff;
+		text-decoration: none;
+		padding: 12px 16px;
+		border-radius: 999px;
+		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+		font-weight: 700;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.call-float { position: fixed; bottom: 24px; left: 24px; z-index: 1000; display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: #ffffff; text-decoration: none; padding: 12px 16px; border-radius: 999px; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18); font-weight: 700; }
+
+	.whatsapp-float:hover,
+	.whatsapp-float:focus-visible {
+		transform: translateY(-2px);
+		box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+	}
+
+	.whatsapp-label {
+		font-size: 0.95rem;
+	}
+
+	@media (max-width: 640px) {
+		.whatsapp-float {
+			bottom: 16px;
+			right: 16px;
+			padding: 10px 14px;
+		}
+		.call-float { bottom: 16px; left: 16px; padding: 10px 14px; }
+	}
+</style>

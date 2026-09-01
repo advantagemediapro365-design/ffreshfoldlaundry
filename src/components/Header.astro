@@ -1,0 +1,372 @@
+---
+---
+
+<header>
+	<nav class="navbar" aria-label="Main navigation">
+		<div class="container nav-container">
+			<div class="logo">
+				<a href="/" aria-label="Fresh Fold Laundry Delivery Altoona Home">
+					<img src="/images/freshfold-logo.jpg" alt="Fresh Fold Laundry Delivery Altoona logo" />
+					<span>Fresh Fold Laundry Delivery Altoona</span>
+				</a>
+			</div>
+			<button 
+				class="hamburger" 
+				id="menu-toggle" 
+				aria-expanded="false" 
+				aria-controls="nav-menu"
+				aria-label="Toggle navigation menu"
+			>
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+			<ul class="nav-menu" id="nav-menu">
+				<li><a href="/">Home</a></li>
+				<li><a href="/pricing">Pricing</a></li>
+				<li><a href="/subscriptions">Subscriptions</a></li>
+				<li><a href="/delivery-pass">Delivery Pass</a></li>
+				<li><a href="/commercial-laundry">Commercial</a></li>
+				<li class="pages-dropdown">
+					<button type="button" class="pages-toggle" aria-expanded="false" aria-controls="pages-menu">Pages <span aria-hidden="true">▾</span></button>
+					<ul class="pages-menu" id="pages-menu">
+						<li><a href="/service-areas">Service Areas</a></li>
+						<li><a href="/blog">Blog</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+				</li>
+			</ul>
+			<div class="nav-actions">
+				<a href="/book-pickup" class="btn btn-primary">Book Pickup</a>
+			</div>
+		</div>
+	</nav>
+	<div class="header-info">
+		<div class="container">
+			<div class="info-items">
+				<div class="info-item">
+					<span>Daily service in Altoona & State College • Weekly route in Lock Haven</span>
+				</div>
+				<div class="info-item">
+					<a href="tel:+15704947523">Call/Text 570-494-7523</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<style>
+	header {
+		background-color: white;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+
+	.header-info {
+		background-color: #001f3f;
+		color: white;
+		padding: 12px 0;
+		font-size: 0.9rem;
+	}
+
+	.info-items {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 20px;
+	}
+
+	.navbar {
+		padding: 15px 0;
+	}
+
+	.nav-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 40px;
+	}
+
+	.logo a {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		text-decoration: none;
+		color: #0066a1;
+		font-weight: 700;
+		font-size: 1.3rem;
+	}
+
+	.nav-menu {
+		display: flex;
+		list-style: none;
+		gap: 30px;
+		flex: 1;
+	}
+
+	.nav-menu a {
+		text-decoration: none;
+		color: #333;
+		font-weight: 500;
+		transition: color 0.3s;
+	}
+
+	.nav-menu a:hover {
+		color: #00a0c6;
+	}
+
+	.pages-dropdown {
+		position: relative;
+	}
+
+	.pages-toggle {
+		padding: 0;
+		background: transparent;
+		color: #333;
+		font: inherit;
+	}
+
+	.pages-toggle:hover,
+	.pages-toggle:focus-visible {
+		color: #00a0c6;
+	}
+
+	.pages-menu {
+		position: absolute;
+		top: calc(100% + 15px);
+		left: -16px;
+		display: none;
+		min-width: 170px;
+		padding: 10px;
+		background: white;
+		border: 1px solid #e0e0e0;
+		box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+		list-style: none;
+	}
+
+	.pages-dropdown.open .pages-menu,
+	.pages-dropdown:focus-within .pages-menu {
+		display: block;
+	}
+
+	.pages-menu li {
+		padding: 0;
+	}
+
+	.pages-menu a {
+		display: block;
+		padding: 9px 10px;
+		white-space: nowrap;
+	}
+
+	.nav-actions {
+		display: flex;
+		gap: 15px;
+	}
+
+	.hamburger {
+		display: none;
+		flex-direction: column;
+		gap: 5px;
+		cursor: pointer;
+	}
+
+	.hamburger span {
+		width: 25px;
+		height: 3px;
+		background-color: #333;
+		border-radius: 2px;
+	}
+
+	@media (max-width: 768px) {
+		.navbar {
+			padding: 15px 0;
+		}
+
+		.nav-container {
+			gap: 15px;
+		}
+
+		.nav-menu {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background-color: white;
+			flex-direction: column;
+			gap: 0;
+			padding: 20px;
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height 0.3s ease;
+		}
+
+		.nav-menu.active {
+			max-height: 500px;
+			display: flex;
+		}
+
+		.nav-menu li {
+			padding: 12px 0;
+			border-bottom: 1px solid #eee;
+		}
+
+		.pages-dropdown {
+			width: 100%;
+		}
+
+		.pages-toggle {
+			width: 100%;
+			text-align: left;
+		}
+
+		.pages-menu {
+			position: static;
+			min-width: 0;
+			padding: 0 0 0 14px;
+			border: 0;
+			box-shadow: none;
+		}
+
+		.pages-dropdown.open .pages-menu,
+		.pages-dropdown:focus-within .pages-menu {
+			display: block;
+		}
+
+		.nav-menu li:last-child {
+			border-bottom: none;
+		}
+
+		.nav-actions {
+			display: none;
+		}
+
+		.nav-actions.active {
+			display: flex;
+			position: absolute;
+			top: 100%;
+			right: 20px;
+			flex-direction: column;
+			gap: 10px;
+			padding-top: 10px;
+			border-top: 1px solid #eee;
+		}
+
+		.hamburger {
+			display: flex;
+		}
+
+		.hamburger.active span:nth-child(1) {
+			transform: rotate(45deg) translate(8px, 8px);
+		}
+
+		.hamburger.active span:nth-child(2) {
+			opacity: 0;
+		}
+
+		.hamburger.active span:nth-child(3) {
+			transform: rotate(-45deg) translate(7px, -7px);
+		}
+
+		.info-items {
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		h1 {
+			font-size: 1.8rem;
+		}
+
+		h2 {
+			font-size: 1.5rem;
+		}
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const hamburger = document.querySelector('#menu-toggle');
+		const navMenu = document.querySelector('#nav-menu');
+		const navActions = document.querySelector('.nav-actions');
+		const pagesDropdown = document.querySelector('.pages-dropdown');
+		const pagesToggle = document.querySelector<HTMLButtonElement>('.pages-toggle');
+
+		const closePagesMenu = () => {
+			pagesDropdown?.classList.remove('open');
+			pagesToggle?.setAttribute('aria-expanded', 'false');
+		};
+
+		pagesToggle?.addEventListener('click', () => {
+			const isOpen = pagesToggle.getAttribute('aria-expanded') === 'true';
+			pagesToggle.setAttribute('aria-expanded', String(!isOpen));
+			pagesDropdown?.classList.toggle('open', !isOpen);
+		});
+
+		if (hamburger && navMenu) {
+			// Handle hamburger button click and keyboard
+			const toggleMenu = () => {
+				const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+				hamburger.setAttribute('aria-expanded', !isOpen);
+				hamburger.classList.toggle('active');
+				navMenu.classList.toggle('active');
+				if (navActions) {
+					navActions.classList.toggle('active');
+				}
+			};
+
+			hamburger.addEventListener('click', toggleMenu);
+
+			// Keyboard support for hamburger button (Enter and Space)
+			hamburger.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					toggleMenu();
+				}
+			});
+
+			// Close menu when a link is clicked
+			const navLinks = navMenu.querySelectorAll('a');
+			navLinks.forEach(link => {
+				link.addEventListener('click', () => {
+					closePagesMenu();
+					hamburger.setAttribute('aria-expanded', 'false');
+					hamburger.classList.remove('active');
+					navMenu.classList.remove('active');
+					if (navActions) {
+						navActions.classList.remove('active');
+					}
+				});
+
+				// Keyboard support for closing menu with Escape
+				link.addEventListener('keydown', (e) => {
+					if (e.key === 'Escape') {
+						hamburger.setAttribute('aria-expanded', 'false');
+						hamburger.classList.remove('active');
+						navMenu.classList.remove('active');
+						if (navActions) {
+							navActions.classList.remove('active');
+						}
+						hamburger.focus();
+					}
+				});
+			});
+
+			// Close menu with Escape key anywhere
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && hamburger.getAttribute('aria-expanded') === 'true') {
+					closePagesMenu();
+					hamburger.setAttribute('aria-expanded', 'false');
+					hamburger.classList.remove('active');
+					navMenu.classList.remove('active');
+					if (navActions) {
+						navActions.classList.remove('active');
+					}
+				}
+			});
+		}
+	});
+</script>

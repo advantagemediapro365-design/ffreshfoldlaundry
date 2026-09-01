@@ -1,0 +1,726 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getZipAvailability } from '../lib/zipAvailability.js';
+
+const availabilityMessage = 'Enter your ZIP code to check whether we offer daily service, weekly route service, or route-based pickup in your area.';
+---
+
+<Layout
+	title="Laundry Pickup & Delivery Service Areas | Fresh Fold Laundry Delivery Altoona"
+	description="Fresh Fold Laundry Delivery Altoona serves Altoona, State College, Lock Haven, Blair County, and nearby Central Pennsylvania towns through daily, weekly, and route-based pickup."
+	canonicalPath="/service-areas"
+>
+	<!-- Hero Section -->
+	<section class="hero">
+		<div class="container">
+			<h1>Fresh Fold Delivery Service Areas</h1>
+			<p>Fresh Fold Delivery currently offers daily service in Altoona and State College, weekly route service in Lock Haven, and route-based availability across Blair County and nearby Central Pennsylvania communities.</p>
+			<div class="hero-actions">
+				<a href="#zipcode" class="btn btn-primary">Check My ZIP Code</a>
+				<a href="/book-pickup" class="btn btn-secondary">Book Pickup</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Service Map -->
+	<section class="service-map">
+		<div class="container">
+			<div class="map-container">
+				<iframe title="Fresh Fold service area from Altoona to Lock Haven" src="https://www.openstreetmap.org/export/embed.html?bbox=-78.75%2C40.80%2C-77.30%2C41.35&amp;layer=mapnik&amp;marker=40.81%2C-78.40" loading="lazy"></iframe>
+				<div class="service-locations">
+					<div class="location">Lock Haven - Weekly Route</div>
+					<div class="location">State College - Daily Service</div>
+					<div class="location">Altoona - Daily Service</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Service Areas -->
+	<section class="service-areas">
+		<div class="container">
+			<div class="areas-grid">
+				<!-- Altoona -->
+				<div class="area-card">
+					<div class="area-icon">🏙️</div>
+					<h3>Altoona</h3>
+					<p class="area-service">Daily Service</p>
+					<ul class="area-features">
+						<li>Daily pickup and delivery available</li>
+						<li>Altoona / 16601 route area</li>
+						<li>Nearby areas by route schedule</li>
+					</ul>
+					<p class="area-hub"><strong>Primary Hub</strong></p>
+				</div>
+
+				<!-- State College -->
+				<div class="area-card">
+					<div class="area-icon">🎓</div>
+					<h3>State College</h3>
+					<p class="area-service">Daily Service</p>
+					<ul class="area-features">
+						<li>Daily pickup and delivery available</li>
+						<li>State College / 16801 route areas</li>
+						<li>Student and household plans available</li>
+					</ul>
+					<p class="area-hub"><strong>Primary Hub</strong></p>
+				</div>
+
+				<!-- Lock Haven -->
+				<div class="area-card">
+					<div class="area-icon">🛣️</div>
+					<h3>Lock Haven</h3>
+					<p class="area-service">Weekly Route</p>
+					<ul class="area-features">
+						<li>Weekly laundry pickup and delivery route</li>
+						<li>Lock Haven / 17745 weekly route</li>
+						<li>No daily service advertised yet</li>
+					</ul>
+					<p class="area-hub"><strong>Weekly Route</strong></p>
+				</div>
+
+				<!-- Nearby Areas -->
+				<div class="area-card">
+					<div class="area-icon">📍</div>
+					<h3>Blair County & Nearby Towns</h3>
+					<p class="area-service">Route-Based</p>
+					<ul class="area-features">
+						<li>Hollidaysburg, Duncansville, Tyrone, Bellwood</li>
+						<li>Pickup available by route schedule</li>
+						<li>Waitlist and custom quote options</li>
+					</ul>
+					<p class="area-hub"><strong>Growing Coverage</strong></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Availability Check -->
+	<section class="availability-check" id="zipcode">
+		<div class="container">
+			<div class="check-content">
+				<div class="check-text">
+					<h2>Check Your Availability</h2>
+					<p>{availabilityMessage}</p>
+				</div>
+				<div class="check-form">
+					<form id="zip-check-form" class="zip-check-form">
+						<label for="zipcode">ZIP Code</label>
+						<input type="text" id="zipcode" name="zipcode" inputmode="numeric" autocomplete="postal-code" placeholder="Enter your ZIP code" maxlength="5" required />
+						<button type="submit" class="btn btn-primary">Check My ZIP Code</button>
+					</form>
+					<div id="zip-result" class="zip-result" role="status" aria-live="polite">
+						<p class="zip-result-placeholder">We’ll confirm whether your ZIP code has daily, weekly, or route-based service.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script type="module">
+		import { getZipAvailability } from '../lib/zipAvailability.js';
+
+		const form = document.getElementById('zip-check-form');
+		const input = document.getElementById('zipcode');
+		const result = document.getElementById('zip-result');
+
+		if (form && input && result) {
+			form.addEventListener('submit', (event) => {
+				event.preventDefault();
+				const zip = input.value.trim();
+				const availability = getZipAvailability(zip);
+				result.innerHTML = `
+					<p class="zip-result-title">${availability.label}</p>
+					<p class="zip-result-summary">${availability.summary}</p>
+				`;
+			});
+		}
+	</script>
+
+	<!-- Route Schedule -->
+	<section class="route-schedule">
+		<div class="container">
+			<h2>Route Schedule</h2>
+			<div class="schedule-grid">
+				<div class="schedule-item">
+					<h3>Daily Routes</h3>
+					<div class="routes-list">
+						<p><strong>Altoona (16601 & nearby)</strong></p>
+						<p>Daily service</p>
+					</div>
+					<div class="routes-list">
+						<p><strong>State College (16801 & nearby)</strong></p>
+						<p>Daily service</p>
+					</div>
+				</div>
+				<div class="schedule-item">
+					<h3>Weekly Routes</h3>
+					<div class="routes-list">
+						<p><strong>Lock Haven (17745 & nearby)</strong></p>
+						<p>Weekly route service</p>
+					</div>
+				</div>
+				<div class="schedule-item">
+					<h3>Route-Based Areas</h3>
+					<div class="routes-list">
+						<p><strong>Blair County, Hollidaysburg, Duncansville, Tyrone, Bellwood</strong></p>
+						<p>Pickup and delivery available by route schedule. Enter your ZIP code or request pickup to confirm the next available route day.</p>
+					</div>
+				</div>
+			</div>
+			<p class="schedule-note">Expansion areas are added based on demand. Join the waitlist if your town is not on an active route.</p>
+		</div>
+	</section>
+
+	<!-- Service Details -->
+	<section class="service-details">
+		<div class="container">
+			<h2>How Delivery Pricing Works</h2>
+			<div class="details-grid">
+				<div class="detail-item">
+					<div class="detail-icon">📍</div>
+					<h3>Laundry and delivery are priced separately</h3>
+					<p>Laundry is by the pound. Delivery uses dispatch fee, mileage, and route conditions.</p>
+				</div>
+				<div class="detail-item">
+					<div class="detail-icon">💰</div>
+					<h3>Round-trip mileage pricing</h3>
+					<p>Round-trip miles = one-way miles x 2, then multiplied by the applicable mileage rate.</p>
+				</div>
+				<div class="detail-item">
+					<div class="detail-icon">📊</div>
+					<h3>Delivery Pass available</h3>
+					<p>Delivery Pass removes the base dispatch fee and adds member mileage pricing.</p>
+				</div>
+			</div>
+			<div class="pricing-link">
+				<a href="/pricing">View Pricing Details →</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Waitlist -->
+	<section class="waitlist">
+		<div class="container">
+			<h2>Outside Our Active Service Areas?</h2>
+			<p>Join the waitlist and be the first to know when we expand to your area. We're adding new routes based on demand.</p>
+			<form class="waitlist-form">
+				<div class="form-row">
+					<div class="form-group">
+						<input type="text" placeholder="First Name" />
+					</div>
+					<div class="form-group">
+						<input type="email" placeholder="Email Address" />
+					</div>
+					<div class="form-group">
+						<input type="text" placeholder="ZIP Code" />
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">Join Waitlist</button>
+			</form>
+			<p class="form-note">We respect your privacy. Your info is safe with us.</p>
+		</div>
+	</section>
+
+	<!-- Values -->
+	<section class="values">
+		<div class="container">
+			<div class="values-grid">
+				<div class="value-item">
+					<div class="value-icon">🏘️</div>
+					<h3>Local & Trusted</h3>
+					<p>Central PA Owned</p>
+				</div>
+				<div class="value-item">
+					<div class="value-icon">⏰</div>
+					<h3>Reliable & On-Time</h3>
+					<p>Count on our routes</p>
+				</div>
+				<div class="value-item">
+					<div class="value-icon">🛡️</div>
+					<h3>Care in Every Load</h3>
+					<p>Treated like our own</p>
+				</div>
+				<div class="value-item">
+					<div class="value-icon">🌍</div>
+					<h3>Eco-Friendly</h3>
+					<p>Better for you & the planet</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="final-cta">
+		<div class="container">
+			<h2>Ready to experience Fresh Fold Laundry Service?</h2>
+			<p>Choose your plan and enjoy clean, folded laundry in your area.</p>
+			<div class="cta-buttons">
+				<a href="/book-pickup" class="btn btn-primary">Book Pickup</a>
+				<a href="/subscriptions" class="btn btn-secondary">Start a Subscription</a>
+				<a href="/pricing" class="btn btn-secondary">View Pricing</a>
+				<a href="/delivery-pass" class="btn btn-secondary">Join Delivery Pass</a>
+				<a href="/commercial-laundry" class="btn btn-secondary">Commercial Laundry</a>
+				<a href="/contact" class="btn btn-secondary">Contact</a>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		background: linear-gradient(135deg, #f0f4f8 0%, #e8f2f8 100%);
+		padding: 60px 0;
+		text-align: center;
+	}
+
+	.hero h1 {
+		color: #001f3f;
+		margin-bottom: 15px;
+	}
+
+	.hero p {
+		color: #666;
+		font-size: 1.05rem;
+		max-width: 700px;
+		margin: 0 auto 30px;
+		line-height: 1.8;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 15px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.service-map {
+		padding: 40px 0;
+		background-color: #f9f9f9;
+	}
+
+	.map-container {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		gap: 30px;
+		align-items: center;
+	}
+
+	.map-placeholder {
+		width: 100%;
+		aspect-ratio: 16/9;
+		background: white;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	.map-container iframe {
+		display: block;
+		width: 100%;
+		height: 560px;
+		border: 0;
+		border-radius: 8px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	.map-placeholder svg {
+		width: 100%;
+		height: 100%;
+	}
+
+	.service-locations {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.location {
+		background: white;
+		padding: 15px;
+		border-radius: 6px;
+		border-left: 4px solid #00a0c6;
+		color: #333;
+	}
+
+	.service-areas {
+		padding: 60px 0;
+	}
+
+	.areas-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 25px;
+	}
+
+	.area-card {
+		background: white;
+		padding: 30px;
+		border-radius: 8px;
+		border: 2px solid #e0e0e0;
+		text-align: center;
+		transition: all 0.3s;
+	}
+
+	.area-card:hover {
+		border-color: #00a0c6;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+	}
+
+	.area-icon {
+		font-size: 2.5rem;
+		margin-bottom: 15px;
+	}
+
+	.area-card h3 {
+		color: #001f3f;
+		margin-bottom: 10px;
+	}
+
+	.area-service {
+		color: #00a0c6;
+		font-weight: 700;
+		margin-bottom: 15px;
+	}
+
+	.area-features {
+		list-style: none;
+		margin-bottom: 15px;
+		text-align: left;
+	}
+
+	.area-features li {
+		color: #666;
+		margin-bottom: 8px;
+		font-size: 0.9rem;
+	}
+
+	.area-hub {
+		color: #999;
+		font-size: 0.9rem;
+	}
+
+	.availability-check {
+		background-color: white;
+		padding: 60px 0;
+	}
+
+	.check-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 50px;
+		align-items: center;
+	}
+
+	.check-text h2 {
+		color: #001f3f;
+		margin-bottom: 15px;
+	}
+
+	.check-text p {
+		color: #666;
+		line-height: 1.8;
+	}
+
+	.check-form {
+		background: #f9f9f9;
+		padding: 30px;
+		border-radius: 8px;
+	}
+
+	.check-form form {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.check-form label {
+		color: #333;
+		font-weight: 600;
+	}
+
+	.check-form input {
+		padding: 12px 15px;
+		border: 1px solid #e0e0e0;
+		border-radius: 6px;
+		font-size: 1rem;
+	}
+
+	.check-form button {
+		width: 100%;
+	}
+
+	.zip-result {
+		margin-top: 16px;
+		padding: 16px;
+		border-radius: 8px;
+		background: #ffffff;
+		border: 1px solid #dce7ef;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+	}
+
+	.zip-result-title {
+		font-weight: 700;
+		color: #001f3f;
+		margin-bottom: 6px;
+	}
+
+	.zip-result-summary {
+		color: #4a5568;
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	.zip-result-error {
+		color: #b42318;
+		font-weight: 600;
+		margin: 0;
+	}
+
+	.route-schedule {
+		background-color: #f0f4f8;
+		padding: 60px 0;
+	}
+
+	.route-schedule h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.schedule-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 30px;
+		margin-bottom: 20px;
+	}
+
+	.schedule-item {
+		background: white;
+		padding: 25px;
+		border-radius: 8px;
+	}
+
+	.schedule-item h3 {
+		color: #001f3f;
+		margin-bottom: 20px;
+	}
+
+	.routes-list {
+		margin-bottom: 15px;
+		padding-bottom: 15px;
+		border-bottom: 1px solid #e0e0e0;
+	}
+
+	.routes-list:last-child {
+		border-bottom: none;
+		margin-bottom: 0;
+	}
+
+	.routes-list p {
+		color: #666;
+		margin-bottom: 5px;
+		font-size: 0.9rem;
+	}
+
+	.routes-list p strong {
+		color: #001f3f;
+	}
+
+	.schedule-note {
+		text-align: center;
+		color: #999;
+		font-size: 0.9rem;
+	}
+
+	.service-details {
+		padding: 60px 0;
+	}
+
+	.service-details h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.details-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 30px;
+		margin-bottom: 30px;
+	}
+
+	.detail-item {
+		text-align: center;
+	}
+
+	.detail-icon {
+		font-size: 2.5rem;
+		margin-bottom: 15px;
+		display: block;
+	}
+
+	.detail-item h3 {
+		color: #001f3f;
+		margin-bottom: 8px;
+		font-size: 1.05rem;
+	}
+
+	.detail-item p {
+		color: #666;
+	}
+
+	.pricing-link {
+		text-align: center;
+	}
+
+	.pricing-link a {
+		color: #00a0c6;
+		text-decoration: none;
+		font-weight: 600;
+		transition: color 0.3s;
+	}
+
+	.pricing-link a:hover {
+		color: #0066a1;
+	}
+
+	.waitlist {
+		background-color: #f9f9f9;
+		padding: 60px 0;
+		text-align: center;
+	}
+
+	.waitlist h2 {
+		color: #001f3f;
+		margin-bottom: 15px;
+	}
+
+	.waitlist > .container > p {
+		color: #666;
+		margin-bottom: 30px;
+		font-size: 1.05rem;
+	}
+
+	.waitlist-form {
+		max-width: 700px;
+		margin: 0 auto 20px;
+	}
+
+	.form-row {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 15px;
+		margin-bottom: 15px;
+	}
+
+	.form-group input {
+		width: 100%;
+		padding: 12px 15px;
+		border: 1px solid #e0e0e0;
+		border-radius: 6px;
+		font-size: 1rem;
+	}
+
+	.waitlist-form button {
+		width: 100%;
+		max-width: 300px;
+	}
+
+	.form-note {
+		color: #999;
+		font-size: 0.85rem;
+	}
+
+	.values {
+		padding: 60px 0;
+	}
+
+	.values-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 30px;
+	}
+
+	.value-item {
+		text-align: center;
+	}
+
+	.value-icon {
+		font-size: 2.5rem;
+		margin-bottom: 15px;
+		display: block;
+	}
+
+	.value-item h3 {
+		color: #001f3f;
+		margin-bottom: 8px;
+	}
+
+	.value-item p {
+		color: #666;
+	}
+
+	.final-cta {
+		background: linear-gradient(135deg, #0066a1 0%, #00a0c6 100%);
+		color: white;
+		text-align: center;
+		padding: 80px 0;
+	}
+
+	.final-cta h2 {
+		color: white;
+		margin-bottom: 10px;
+	}
+
+	.final-cta p {
+		font-size: 1.1rem;
+		margin-bottom: 30px;
+		opacity: 0.95;
+	}
+
+	.cta-buttons {
+		display: flex;
+		gap: 15px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.cta-buttons .btn {
+		min-width: 180px;
+	}
+
+	@media (max-width: 768px) {
+		.map-container iframe {
+			height: 460px;
+		}
+
+		.hero h1 {
+			font-size: 1.8rem;
+		}
+
+		.check-content {
+			grid-template-columns: 1fr;
+		}
+
+		.map-container {
+			grid-template-columns: 1fr;
+		}
+
+		.areas-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.form-row {
+			grid-template-columns: 1fr;
+		}
+
+		.cta-buttons {
+			flex-direction: column;
+		}
+
+		.cta-buttons .btn {
+			min-width: auto;
+		}
+	}
+</style>

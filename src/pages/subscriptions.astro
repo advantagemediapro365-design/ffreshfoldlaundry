@@ -1,0 +1,802 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSubscriptionPlans } from '../lib/wix';
+
+const plans = await getSubscriptionPlans();
+---
+
+<Layout
+	title="Laundry Subscription Plans | Fresh Fold Delivery"
+	description="Fresh Fold Delivery offers laundry subscription plans in Central PA for students, households, and families, with optional Delivery Pass benefits where available."
+	canonicalPath="/subscriptions"
+>
+	<!-- Hero Section -->
+	<section class="hero">
+		<div class="container">
+			<h1>Laundry Subscriptions That Save Time Every Week</h1>
+			<p>Fresh Fold subscriptions cover laundry processing only, with delivery calculated separately unless Delivery Pass or an approved promotion applies.</p>
+			<p>Select a plan to see your monthly total, then pay online or contact us by WhatsApp or email.</p>
+			<div class="hero-buttons">
+				<a href="#plans" class="btn btn-primary">Compare Plans</a>
+				<a href="/pricing" class="btn btn-secondary">View Pricing Details</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Hero Image -->
+	<!-- <section class="hero-image-section">
+		<div class="hero-image"></div>
+	</section> -->
+
+	<!-- Benefits -->
+	<section class="benefits">
+		<div class="container">
+			<div class="benefits-grid">
+				<div class="benefit-item">
+					<div class="benefit-icon">📅</div>
+					<h3>Recurring Pickup</h3>
+					<p>Route-based scheduling</p>
+				</div>
+				<div class="benefit-item">
+					<div class="benefit-icon">💰</div>
+					<h3>Better Pricing</h3>
+					<p>Included monthly pounds</p>
+				</div>
+				<div class="benefit-item">
+					<div class="benefit-icon">🚀</div>
+					<h3>Route Priority</h3>
+					<p>Priority on your service day</p>
+				</div>
+				<div class="benefit-item">
+					<div class="benefit-icon">📅</div>
+					<h3>Delivery Separate</h3>
+					<p>Add Delivery Pass if it fits</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Subscription Plans -->
+	<section class="plans" id="plans">
+		<div class="container">
+			<h2>Choose Your Plan</h2>
+			<div class="plans-grid">
+				<div class="plan-card" id="student-plan">
+					<h3>Student Plan</h3>
+					<p class="plan-price">$109<span>/month</span></p>
+					<div class="plan-details">
+						<p><strong>Includes 60 lb/month</strong></p>
+						<p>Suggested use: 15 lb/week</p>
+						<p>First month: $92.65 with 15% laundry discount</p>
+					</div>
+					<ul class="plan-features">
+						<li>Best for students, light weekly laundry, and parent-paid student plans.</li>
+						<li>Overage: $1.89/lb</li>
+						<li>Delivery is calculated separately.</li>
+					</ul>
+					<div class="plan-actions">
+						<a href={`/subscribe?plan=${encodeURIComponent(plans[0].slug)}`} class="btn btn-primary">Choose & pay</a>
+						<a href="/subscriptions/student-plan" class="btn btn-secondary">View Details</a>
+					</div>
+				</div>
+
+				<div class="plan-card" id="weekly-household-plan">
+					<h3>Weekly Household Plan</h3>
+					<p class="plan-price">$149<span>/month</span></p>
+					<div class="plan-details">
+						<p><strong>Includes 85 lb/month</strong></p>
+						<p>Recurring pickup schedule</p>
+						<p>First month: $126.65 with 15% laundry discount</p>
+					</div>
+					<ul class="plan-features">
+						<li>Best for regular weekly laundry users who want predictable pricing.</li>
+						<li>Overage: $1.75/lb</li>
+						<li>Delivery is calculated separately.</li>
+					</ul>
+					<div class="plan-actions">
+						<a href={`/subscribe?plan=${encodeURIComponent(plans[1].slug)}`} class="btn btn-primary">Choose & pay</a>
+						<a href="/subscriptions/weekly-household-plan" class="btn btn-secondary">View Details</a>
+					</div>
+				</div>
+
+				<div class="plan-card" id="family-plan">
+					<h3>Family Plan</h3>
+					<p class="plan-price">$229<span>/month</span></p>
+					<div class="plan-details">
+						<p><strong>Includes 150 lb/month</strong></p>
+						<p>Recurring pickup schedule</p>
+						<p>First month: $194.65 with 15% laundry discount</p>
+					</div>
+					<ul class="plan-features">
+						<li>Best for families and larger households.</li>
+						<li>Overage: $1.65/lb</li>
+						<li>Delivery is calculated separately.</li>
+					</ul>
+					<div class="plan-actions">
+						<a href={`/subscribe?plan=${encodeURIComponent(plans[2].slug)}`} class="btn btn-primary">Choose & pay</a>
+						<a href="/subscriptions/family-plan" class="btn btn-secondary">View Details</a>
+					</div>
+				</div>
+
+				<div class="plan-card featured" id="route-plus-plan">
+					<div class="badge">Best Value</div>
+					<h3>Route Plus Plan</h3>
+					<p class="plan-price">$299<span>/month</span></p>
+					<div class="plan-details">
+						<p><strong>Includes 200 lb/month</strong></p>
+						<p>For high-volume recurring users</p>
+						<p>First month: $254.15 with 15% laundry discount</p>
+					</div>
+					<ul class="plan-features">
+						<li>Best for heavy users, shared homes, rentals, and recurring high-volume customers.</li>
+						<li>Overage: $1.50/lb</li>
+						<li>Delivery is calculated separately.</li>
+					</ul>
+					<div class="plan-actions">
+						<a href={`/subscribe?plan=${encodeURIComponent(plans[3].slug)}`} class="btn btn-primary">Choose & pay</a>
+						<a href="/subscriptions/route-plus-plan" class="btn btn-secondary">View Details</a>
+					</div>
+				</div>
+			</div>
+			<div class="disclaimer">
+				<p>Fresh Fold subscriptions cover laundry processing only. Delivery, mileage, add-ons, specialty items, driver tips, missed pickup fees, and redelivery fees are separate unless specifically included in an approved promotion or written commercial agreement.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Comparison Table -->
+	<section class="comparison">
+		<div class="container">
+			<h2>Compare All Plans</h2>
+			<div class="table-responsive">
+				<table>
+					<thead>
+						<tr>
+							<th>Plan</th>
+							<th>Monthly Price</th>
+							<th>Included Laundry</th>
+							<th>Effective Price/lb</th>
+							<th>Overage</th>
+							<th>Delivery</th>
+							<th>Ideal For</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><strong>Student Plan</strong></td>
+							<td>$109</td>
+							<td>60 lb/month</td>
+							<td>$1.82/lb</td>
+							<td>$1.89/lb</td>
+							<td>Separate</td>
+							<td>Students and light weekly users</td>
+						</tr>
+						<tr>
+							<td><strong>Weekly Household Plan</strong></td>
+							<td>$149</td>
+							<td>85 lb/month</td>
+							<td>$1.75/lb</td>
+							<td>$1.75/lb</td>
+							<td>Separate</td>
+							<td>Couples, small households</td>
+						</tr>
+						<tr>
+							<td><strong>Family Plan</strong></td>
+							<td>$229</td>
+							<td>150 lb/month</td>
+							<td>$1.53/lb</td>
+							<td>$1.65/lb</td>
+							<td>Separate</td>
+							<td>Families, larger laundry needs</td>
+						</tr>
+						<tr class="featured-row">
+							<td><strong>Route Plus Plan</strong></td>
+							<td>$299</td>
+							<td>200 lb/month</td>
+							<td>$1.50/lb</td>
+							<td>$1.50/lb</td>
+							<td>Separate</td>
+							<td>High-volume homes and shared houses</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<!-- Features -->
+	<section class="features">
+		<div class="container">
+			<h2>Why Subscribe with Fresh Fold?</h2>
+			<div class="features-grid">
+				<div class="feature">
+					<div class="feature-icon">📅</div>
+					<h3>Recurring Pickup</h3>
+					<p>We'll be there on your scheduled day, every time.</p>
+				</div>
+				<div class="feature">
+					<div class="feature-icon">💰</div>
+					<h3>First-Month Savings</h3>
+					<p>15% off the first month applies to laundry processing only.</p>
+				</div>
+				<div class="feature">
+					<div class="feature-icon">🚀</div>
+					<h3>Delivery Pass Optional</h3>
+					<p>Add Delivery Pass separately to remove the base dispatch fee and use member mileage rates.</p>
+				</div>
+				<div class="feature">
+					<div class="feature-icon">🎯</div>
+					<h3>Predictable Schedule</h3>
+					<p>Set it and forget it. Reliable, consistent service.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Flexibility -->
+	<section class="flexibility">
+		<div class="container">
+			<h2>Subscription Flexibility</h2>
+			<div class="flexibility-grid">
+				<div class="flex-item">
+					<div class="flex-icon">⏸️</div>
+					<h3>Autopay, Simplified</h3>
+					<p>Simple automatic billing on the same date, never worry.</p>
+				</div>
+				<div class="flex-item">
+					<div class="flex-icon">⏸️</div>
+					<h3>Skip or Pause Anytime</h3>
+					<p>Skip a week or pause without losing your service!</p>
+				</div>
+				<div class="flex-item">
+					<div class="flex-icon">🔄</div>
+					<h3>Recurring Billing</h3>
+					<p>Recurring billing on the same date, every month.</p>
+				</div>
+				<div class="flex-item">
+					<div class="flex-icon">🚚</div>
+					<h3>Delivery Not Included</h3>
+					<p>Delivery is separate unless an approved promotion or written agreement says otherwise.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Delivery Pass -->
+	<section class="student-plans">
+		<div class="container">
+			<h2>Need Delivery Savings Too?</h2>
+			<div class="student-grid">
+				<div class="student-card">
+					<h3>Fresh Fold Delivery Pass</h3>
+					<p class="student-price">$7.99<span>/month</span></p>
+					<p>$0 base dispatch fee</p>
+					<p>$1.50/round-trip mile intro rate for first 3 months</p>
+					<a href="/delivery-pass" class="btn btn-primary">View Delivery Pass</a>
+				</div>
+				<div class="student-card">
+					<h3>Discount Reminder</h3>
+					<p class="student-price">15%<span> first month</span></p>
+					<p>Applies to laundry processing only</p>
+					<p>Delivery, add-ons, tips, specialty items, and Delivery Pass are not discounted.</p>
+					<a href="/pricing" class="btn btn-primary">View Pricing</a>
+				</div>
+			</div>
+			<p class="student-note">After the first month, subscriptions renew at the regular monthly price.</p>
+		</div>
+	</section>
+
+	<!-- FAQ -->
+	<section class="faq">
+		<div class="container">
+			<h2>Frequently Asked Questions</h2>
+			<div class="faq-grid">
+				<div class="faq-item">
+					<h4>What happens if I go over my included pounds?</h4>
+					<p>You'll only pay for the overage at our overage rate. No surprises or hidden fees.</p>
+				</div>
+				<div class="faq-item">
+					<h4>Can I cancel or change my plan?</h4>
+					<p>Yes! You can cancel, skip, or pause any time without penalties or extra charges.</p>
+				</div>
+				<div class="faq-item">
+					<h4>Does Delivery Pass mean free delivery?</h4>
+					<p>Delivery Pass does not mean unlimited free delivery. It removes the base dispatch fee and applies member mileage pricing.</p>
+				</div>
+			</div>
+			<div class="view-all-faq">
+				<a href="/contact">View all FAQs →</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="subscription-cta">
+		<div class="container">
+			<h2>Ready to make laundry one less thing to think about?</h2>
+			<p>Choose your plan and enjoy clean, folded laundry—week after week.</p>
+			<div class="cta-buttons">
+				<a href="#plans" class="btn btn-primary">Start a Subscription</a>
+				<a href="/book-pickup" class="btn btn-secondary">Book One-Time Pickup</a>
+				<a href="/delivery-pass" class="btn btn-secondary">View Delivery Pass</a>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		background: linear-gradient(135deg, #f0f4f8 0%, #e8f2f8 100%);
+		padding: 60px 0;
+		text-align: center;
+	}
+
+	.hero h1 {
+		color: #001f3f;
+		margin-bottom: 15px;
+	}
+
+	.hero p {
+		color: #666;
+		font-size: 1.1rem;
+		max-width: 700px;
+		margin: 0 auto 30px;
+		line-height: 1.8;
+	}
+
+	.hero-buttons {
+		display: flex;
+		gap: 15px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.hero-image-section {
+		background-color: #f9f9f9;
+		padding: 40px 0;
+	}
+
+	.hero-image {
+		width: 100%;
+		aspect-ratio: 16/9;
+		background: linear-gradient(135deg, #e8f2f8 0%, #d4e6f1 100%);
+		border-radius: 8px;
+		max-width: 100%;
+	}
+
+	.benefits {
+		padding: 60px 0;
+	}
+
+	.benefits-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 30px;
+	}
+
+	.benefit-item {
+		text-align: center;
+	}
+
+	.benefit-icon {
+		font-size: 2.5rem;
+		margin-bottom: 15px;
+		display: block;
+	}
+
+	.benefit-item h3 {
+		color: #001f3f;
+		margin-bottom: 8px;
+	}
+
+	.benefit-item p {
+		color: #666;
+	}
+
+	.plans {
+		background-color: #f9f9f9;
+		padding: 60px 0;
+	}
+
+	.plans h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.plans-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 25px;
+	}
+
+	.plan-card {
+		background: white;
+		padding: 30px;
+		border-radius: 8px;
+		border: 2px solid transparent;
+		transition: all 0.3s;
+		position: relative;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	.plan-actions {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		margin-top: 20px;
+	}
+
+	.plan-card:hover {
+		transform: translateY(-10px);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+	}
+
+	.plan-card.featured {
+		border-color: #00a0c6;
+		background: linear-gradient(135deg, #f0f4f8 0%, #e8f2f8 100%);
+	}
+
+	.plan-card h3 {
+		color: #001f3f;
+		margin-bottom: 10px;
+	}
+
+	.plan-price {
+		font-size: 1.8rem;
+		font-weight: 700;
+		color: #00a0c6;
+		margin-bottom: 15px;
+	}
+
+	.plan-price span {
+		font-size: 1rem;
+		color: #666;
+		font-weight: 500;
+	}
+
+	.plan-details {
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #e0e0e0;
+	}
+
+	.plan-details p {
+		color: #666;
+		font-size: 0.95rem;
+		margin-bottom: 5px;
+	}
+
+	.plan-features {
+		list-style: none;
+		margin-bottom: 20px;
+	}
+
+	.plan-features li {
+		color: #666;
+		margin-bottom: 8px;
+		font-size: 0.9rem;
+	}
+
+	.plan-card button {
+		width: 100%;
+	}
+
+	.plan-card .btn,
+	.student-card .btn {
+		width: 100%;
+		text-align: center;
+	}
+
+	.badge {
+		position: absolute;
+		top: 15px;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: #00a0c6;
+		color: white;
+		padding: 6px 12px;
+		border-radius: 20px;
+		font-size: 0.75rem;
+		font-weight: 600;
+	}
+
+	.comparison {
+		padding: 60px 0;
+	}
+
+	.comparison h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.table-responsive {
+		overflow-x: auto;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		background: white;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	th, td {
+		padding: 15px;
+		text-align: left;
+		border-bottom: 1px solid #e0e0e0;
+	}
+
+	th {
+		background-color: #001f3f;
+		color: white;
+		font-weight: 600;
+	}
+
+	td {
+		color: #333;
+	}
+
+	.featured-row {
+		background-color: #f0f4f8;
+		font-weight: 600;
+	}
+
+	.disclaimer {
+		max-width: 940px;
+		margin: 30px auto 0;
+		background: white;
+		border: 1px solid #d8e8ef;
+		border-radius: 8px;
+		padding: 22px;
+	}
+
+	.disclaimer p {
+		color: #555;
+		line-height: 1.7;
+		margin: 0;
+	}
+
+	.features {
+		background-color: #f9f9f9;
+		padding: 60px 0;
+	}
+
+	.features h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 30px;
+	}
+
+	.feature {
+		text-align: center;
+	}
+
+	.feature-icon {
+		font-size: 2.5rem;
+		margin-bottom: 15px;
+		display: block;
+	}
+
+	.feature h3 {
+		color: #001f3f;
+		margin-bottom: 8px;
+	}
+
+	.feature p {
+		color: #666;
+		line-height: 1.6;
+	}
+
+	.flexibility {
+		padding: 60px 0;
+	}
+
+	.flexibility h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.flexibility-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 25px;
+	}
+
+	.flex-item {
+		background: white;
+		padding: 25px;
+		border-radius: 8px;
+		text-align: center;
+		border: 1px solid #e0e0e0;
+	}
+
+	.flex-icon {
+		font-size: 2.5rem;
+		margin-bottom: 10px;
+		display: block;
+	}
+
+	.flex-item h3 {
+		color: #001f3f;
+		margin-bottom: 8px;
+		font-size: 1rem;
+	}
+
+	.flex-item p {
+		color: #666;
+		font-size: 0.9rem;
+	}
+
+	.student-plans {
+		background-color: #f0f4f8;
+		padding: 60px 0;
+	}
+
+	.student-plans h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.student-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 30px;
+		margin-bottom: 20px;
+	}
+
+	.student-card {
+		background: white;
+		padding: 30px;
+		border-radius: 8px;
+		text-align: center;
+	}
+
+	.student-card h3 {
+		color: #001f3f;
+		margin-bottom: 10px;
+	}
+
+	.student-price {
+		font-size: 1.8rem;
+		font-weight: 700;
+		color: #00a0c6;
+		margin-bottom: 10px;
+	}
+
+	.student-price span {
+		font-size: 1rem;
+		color: #666;
+		font-weight: 500;
+	}
+
+	.student-card p {
+		color: #666;
+		margin-bottom: 8px;
+	}
+
+	.student-card button {
+		margin-top: 15px;
+		width: 100%;
+	}
+
+	.student-note {
+		text-align: center;
+		color: #999;
+		font-size: 0.9rem;
+	}
+
+	.faq {
+		padding: 60px 0;
+	}
+
+	.faq h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.faq-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 30px;
+		margin-bottom: 30px;
+	}
+
+	.faq-item {
+		background: white;
+		padding: 20px;
+		border-radius: 8px;
+		border-left: 4px solid #00a0c6;
+	}
+
+	.faq-item h4 {
+		color: #001f3f;
+		margin-bottom: 10px;
+	}
+
+	.faq-item p {
+		color: #666;
+		font-size: 0.95rem;
+	}
+
+	.view-all-faq {
+		text-align: center;
+	}
+
+	.view-all-faq a {
+		color: #00a0c6;
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	.subscription-cta {
+		background: linear-gradient(135deg, #0066a1 0%, #00a0c6 100%);
+		color: white;
+		text-align: center;
+		padding: 80px 0;
+	}
+
+	.subscription-cta h2 {
+		color: white;
+		margin-bottom: 10px;
+	}
+
+	.subscription-cta p {
+		font-size: 1.1rem;
+		margin-bottom: 30px;
+		opacity: 0.95;
+	}
+
+	.cta-buttons {
+		display: flex;
+		gap: 15px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.cta-buttons .btn {
+		min-width: 200px;
+	}
+
+	@media (max-width: 768px) {
+		.hero h1 {
+			font-size: 1.8rem;
+		}
+
+		.hero-buttons {
+			flex-direction: column;
+		}
+
+		.plans-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.cta-buttons {
+			flex-direction: column;
+		}
+
+		.cta-buttons .btn {
+			min-width: auto;
+		}
+
+		table {
+			font-size: 0.85rem;
+		}
+
+		th, td {
+			padding: 10px;
+		}
+	}
+</style>

@@ -1,0 +1,29 @@
+---
+import SubscriptionPlanDetail from '../../components/SubscriptionPlanDetail.astro';
+---
+
+<SubscriptionPlanDetail
+	planName="Student Plan"
+	planSlug="student-plan"
+	monthlyPrice="$109"
+	includedPounds="60 lb/month"
+	overageRate="$1.89/lb"
+	idealFor="Students, light weekly laundry users, and parent-paid student plans"
+	description="A simple recurring plan for lighter laundry loads that still gives you dependable weekly pickup and better pricing."
+	canonicalPath="/subscriptions/student-plan"
+	highlights={[
+		'Best for dorms, apartments, and lighter weekly laundry loads.',
+		'Includes a monthly allowance that fits students and parent-paid plans.',
+		'You only pay extra when your laundry goes over the included monthly pounds.'
+	]}
+	howItWorks={[
+		'Choose a recurring pickup day that fits your routine.',
+		'Leave your laundry out and we handle the wash, dry, and fold service.',
+		'Any laundry above your monthly included pounds is billed at the overage rate.'
+	]}
+	whoItFits={[
+		'Students who want predictable weekly service with less hassle.',
+		'Parents managing a student’s laundry and budget.',
+		'Customers who usually stay around 60 lb or less each month.'
+	]}
+/>

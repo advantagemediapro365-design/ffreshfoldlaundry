@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+function getServiceAreas() {
+	return [
+	{ slug: 'altoona-pa', name: 'Altoona, PA', county: 'Blair County', status: 'Active Daily', title: 'Laundry Pickup & Delivery in Altoona PA | Fresh Fold Delivery', h1: 'Laundry Pickup & Delivery in Altoona, PA', cta: 'Book Altoona Pickup', noindex: false },
+	{ slug: 'state-college-pa', name: 'State College, PA', county: 'Centre County', status: 'Active Daily', title: 'Laundry Pickup & Delivery in State College PA | Fresh Fold Delivery', h1: 'Laundry Pickup & Delivery in State College, PA', cta: 'Book State College Pickup', noindex: false },
+	{ slug: 'lock-haven-pa', name: 'Lock Haven, PA', county: 'Clinton County', status: 'Weekly Route', title: 'Weekly Laundry Pickup & Delivery in Lock Haven PA', h1: 'Weekly Laundry Pickup & Delivery in Lock Haven, PA', cta: 'Join Lock Haven Route', noindex: false },
+	{ slug: 'blair-county-pa', name: 'Blair County, PA', county: 'Blair County', status: 'Route-Based', title: 'Laundry Pickup & Delivery in Blair County PA', h1: 'Blair County Laundry Pickup & Delivery', cta: 'Check My ZIP', noindex: false },
+	{ slug: 'centre-county-pa', name: 'Centre County, PA', county: 'Centre County', status: 'Route-Based', title: 'Laundry Pickup & Delivery in Centre County PA', h1: 'Centre County Laundry Pickup & Delivery', cta: 'Check My ZIP', noindex: false },
+	{ slug: 'central-pa', name: 'Central PA', county: 'Central Pennsylvania', status: 'Mixed Daily, Weekly, and Route-Based', title: 'Laundry Pickup & Delivery in Central PA', h1: 'Central PA Laundry Pickup & Delivery', cta: 'View Service Areas', noindex: false },
+	{ slug: 'hollidaysburg-pa', name: 'Hollidaysburg, PA', county: 'Blair County', status: 'Route-Based', noindex: true },
+	{ slug: 'duncansville-pa', name: 'Duncansville, PA', county: 'Blair County', status: 'Route-Based', noindex: true },
+	{ slug: 'tyrone-pa', name: 'Tyrone, PA', county: 'Blair County', status: 'Route-Based', noindex: true },
+	{ slug: 'bellwood-pa', name: 'Bellwood, PA', county: 'Blair County', status: 'Route-Based', noindex: true },
+	{ slug: 'roaring-spring-pa', name: 'Roaring Spring, PA', county: 'Blair County', status: 'Waitlist', noindex: true },
+	{ slug: 'martinsburg-pa', name: 'Martinsburg, PA', county: 'Blair County', status: 'Waitlist', noindex: true },
+	{ slug: 'east-freedom-pa', name: 'East Freedom, PA', county: 'Blair County', status: 'Waitlist', noindex: true },
+	{ slug: 'williamsburg-pa', name: 'Williamsburg, PA', county: 'Blair County', status: 'Waitlist', noindex: true },
+	{ slug: 'woodbury-pa', name: 'Woodbury / Woodbury Township, PA', county: 'Blair County', status: 'Waitlist', noindex: true },
+	{ slug: 'cresson-pa', name: 'Cresson, PA', county: 'Cambria County', status: 'Waitlist', noindex: true },
+	{ slug: 'huntingdon-pa', name: 'Huntingdon, PA', county: 'Huntingdon County', status: 'Waitlist', noindex: true },
+	{ slug: 'university-park-pa', name: 'University Park, PA', county: 'Centre County', status: 'Route-Based', noindex: true },
+	{ slug: 'bellefonte-pa', name: 'Bellefonte, PA', county: 'Centre County', status: 'Waitlist', noindex: true },
+	{ slug: 'boalsburg-pa', name: 'Boalsburg, PA', county: 'Centre County', status: 'Waitlist', noindex: true },
+	{ slug: 'lemont-pa', name: 'Lemont, PA', county: 'Centre County', status: 'Waitlist', noindex: true },
+	{ slug: 'port-matilda-pa', name: 'Port Matilda, PA', county: 'Centre County', status: 'Waitlist', noindex: true },
+	{ slug: 'milesburg-pa', name: 'Milesburg, PA', county: 'Centre County', status: 'Waitlist', noindex: true },
+	{ slug: 'philipsburg-pa', name: 'Philipsburg, PA', county: 'Centre County', status: 'Waitlist', noindex: true },
+	];
+}
+
+const area = getServiceAreas().find((item) => item.slug === Astro.params.slug);
+if (!area) {
+	return Astro.redirect('/service-areas');
+}
+
+const title = area.title ?? `Laundry Pickup & Delivery in ${area.name} | Fresh Fold Delivery`;
+const h1 = area.h1 ?? `Laundry Pickup & Delivery in ${area.name}`;
+const description = `Fresh Fold Delivery offers laundry pickup and delivery in ${area.name} with wash, dry, fold, subscriptions, route availability, and commercial options.`;
+const primaryCta = area.cta ?? 'Check My ZIP Code';
+---
+
+<Layout title={title} description={description} canonicalPath={`/service-areas/${area.slug}`} noindex={area.noindex}>
+	<section class="hero">
+		<div class="container">
+			<p class="eyebrow">{area.status}</p>
+			<h1>{h1}</h1>
+			<p>{description}</p>
+			<div class="actions">
+				<a href="/book-pickup" class="btn btn-primary">{primaryCta}</a>
+				<a href="/pricing" class="btn btn-secondary">View Pricing</a>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container content-grid">
+			<div>
+				<h2>How Service Works in {area.name}</h2>
+				<p>Book a pickup, prepare your laundry, and choose the preferences that fit your household or business. Fresh Fold Delivery confirms route availability, handles wash, dry, and fold care, then returns clean laundry through the approved delivery flow.</p>
+				<h2>Delivery and Route Status</h2>
+				<p>{area.name} is currently listed as <strong>{area.status}</strong>. Daily service is advertised only for Altoona and State College. Lock Haven is a weekly route. Route-based and waitlist towns should request pickup or enter a ZIP code to confirm the next available route day.</p>
+				<p>Delivery is calculated separately unless a coupon, promotion, written agreement, Delivery Pass benefit, or admin override applies.</p>
+				<h2>Local Laundry Options</h2>
+				<p>Residential wash dry fold, student laundry, household subscriptions, specialty items, and commercial laundry quotes may be available depending on route capacity and ZIP code.</p>
+			</div>
+			<aside>
+				<h2>Helpful Links</h2>
+				<ul>
+					<li><a href="/pricing">Pricing</a></li>
+					<li><a href="/book-pickup">Book Pickup</a></li>
+					<li><a href="/subscriptions">Subscriptions</a></li>
+					<li><a href="/delivery-pass">Delivery Pass</a></li>
+					<li><a href="/commercial-laundry">Commercial Laundry</a></li>
+					<li><a href="/service-areas">All Service Areas</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul>
+			</aside>
+		</div>
+	</section>
+
+	<section class="faq-band">
+		<div class="container">
+			<h2>{area.name} Laundry Pickup FAQs</h2>
+			<div class="faq-grid">
+				<div>
+					<h3>Is service available in {area.name}?</h3>
+					<p>Availability depends on the current route status and ZIP code. Use the booking form or contact Fresh Fold Delivery to confirm.</p>
+				</div>
+				<div>
+					<h3>Can businesses request laundry service?</h3>
+					<p>Yes. Businesses can request a custom quote for towels, linens, rentals, salon items, gym towels, and other recurring laundry needs.</p>
+				</div>
+				<div>
+					<h3>Where can I see pricing?</h3>
+					<p>The Pricing page lists laundry processing rates. Delivery, mileage, add-ons, and custom commercial requests are handled separately.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		background: #f0f4f8;
+		padding: 64px 0;
+		text-align: center;
+	}
+
+	.eyebrow {
+		color: var(--primary);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.hero p {
+		max-width: 760px;
+		margin: 16px auto 0;
+	}
+
+	.actions {
+		display: flex;
+		justify-content: center;
+		gap: 14px;
+		flex-wrap: wrap;
+		margin-top: 28px;
+	}
+
+	.content-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+		gap: 40px;
+	}
+
+	.content-grid h2 {
+		margin: 28px 0 12px;
+	}
+
+	.content-grid h2:first-child {
+		margin-top: 0;
+	}
+
+	aside {
+		background: var(--light);
+		border-radius: 8px;
+		padding: 24px;
+		align-self: start;
+	}
+
+	aside ul {
+		margin-left: 18px;
+	}
+
+	aside a {
+		color: var(--primary);
+	}
+
+	.faq-band {
+		background: #f8fbfd;
+	}
+
+	.faq-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 24px;
+		margin-top: 24px;
+	}
+
+	@media (max-width: 768px) {
+		.content-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,0 +1,29 @@
+---
+import SubscriptionPlanDetail from '../../components/SubscriptionPlanDetail.astro';
+---
+
+<SubscriptionPlanDetail
+	planName="Route Plus Plan"
+	planSlug="route-plus-plan"
+	monthlyPrice="$299"
+	includedPounds="200 lb/month"
+	overageRate="$1.50/lb"
+	idealFor="High-volume homes, shared houses, rentals, and recurring heavy users"
+	description="A premium recurring plan designed for the busiest households and the highest laundry volume."
+	canonicalPath="/subscriptions/route-plus-plan"
+	highlights={[
+		'Ideal for shared homes, rentals, and households with heavy recurring laundry.',
+		'Includes the highest monthly allowance of all subscription options.',
+		'Delivers the best value per pound for customers who consistently use more laundry.'
+	]}
+	howItWorks={[
+		'Set up a recurring schedule for your highest-volume pickup needs.',
+		'We process and return your laundry on a reliable route cadence.',
+		'Any laundry beyond your included monthly allowance is billed at the lower overage rate.'
+	]}
+	whoItFits={[
+		'Shared houses with frequent laundry loads.',
+		'High-volume homes and recurring heavy users.',
+		'Customers who want the most affordable per-pound pricing on a subscription plan.'
+	]}
+/>

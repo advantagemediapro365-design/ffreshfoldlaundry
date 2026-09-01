@@ -1,0 +1,663 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Contact Fresh Fold Laundry Delivery Altoona | Laundry Pickup & Delivery"
+	description="Contact Fresh Fold Laundry Delivery Altoona by phone, text, or email for pickup availability, pricing, commercial laundry quotes, subscriptions, and customer support from Altoona to Lock Haven."
+	canonicalPath="/contact"
+>
+	<!-- Hero Section -->
+	<section class="hero">
+		<div class="container">
+			<h1>Contact Fresh Fold Delivery</h1>
+			<p>Find answers fast or reach out—we're here to make laundry easy.</p>
+		</div>
+	</section>
+
+	<!-- CTA Buttons -->
+	<section class="cta-buttons-section">
+		<div class="container">
+			<div class="cta-buttons">
+				<a href="/book-pickup" class="btn btn-primary">Book Pickup</a>
+				<a href="/commercial-laundry" class="btn btn-secondary">Get Commercial Quote</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- FAQ Section -->
+	<section class="faq-section">
+		<div class="container">
+			<h2>Frequently Asked Questions</h2>
+			<div class="faq-grid">
+				<div class="faq-category">
+					<h3>Pickup & Delivery</h3>
+					<div class="faq-items">
+						<details class="faq-item">
+							<summary>How does pickup and delivery work?</summary>
+							<p>Schedule online, leave your laundry in any bag or basket, and we will pick it up during your selected route window. Delivery is calculated separately unless an approved promotion, Delivery Pass benefit, or written agreement applies.</p>
+						</details>
+						<details class="faq-item">
+							<summary>What are the pickup windows?</summary>
+							<p>We offer flexible pickup windows from early morning to evening based on your preferences and service area.</p>
+						</details>
+					</div>
+				</div>
+
+				<div class="faq-category">
+					<h3>Pricing & Payment</h3>
+					<div class="faq-items">
+						<details class="faq-item">
+							<summary>How is pricing structured?</summary>
+							<p>We price laundry processing and delivery logistics separately so you always know what you're paying for.</p>
+						</details>
+						<details class="faq-item">
+							<summary>What payment methods do you accept?</summary>
+							<p>We accept all major credit cards, digital wallets, and ACH payments for subscriptions.</p>
+						</details>
+					</div>
+				</div>
+
+				<div class="faq-category">
+					<h3>Subscriptions</h3>
+					<div class="faq-items">
+						<details class="faq-item">
+							<summary>Can I cancel my subscription?</summary>
+							<p>Yes! You can cancel, skip, or pause your subscription anytime without penalties or extra charges.</p>
+						</details>
+						<details class="faq-item">
+							<summary>What happens if I go over my included pounds?</summary>
+							<p>You'll only pay for the overage at our stated overage rate. No surprises or hidden fees.</p>
+						</details>
+					</div>
+				</div>
+
+				<div class="faq-category">
+					<h3>Subscriptions</h3>
+					<div class="faq-items">
+						<details class="faq-item">
+							<summary>Is Fresh Fold Delivery available in my town?</summary>
+							<p>Altoona and State College are daily-service focus areas. Lock Haven is route-based weekly, and many nearby towns are handled by route availability or waitlist.</p>
+						</details>
+						<details class="faq-item">
+							<summary>Are there additional charges?</summary>
+							<p>No hidden fees ever. All charges shown upfront before checkout.</p>
+						</details>
+					</div>
+				</div>
+			</div>
+			<div class="view-all-faq">
+				<a href="#">View all FAQs →</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact Section -->
+	<section class="contact-section">
+		<div class="container">
+			<h2>Send Us a Message</h2>
+			<p class="section-subtitle">We typically reply within a few hours.</p>
+			<div class="contact-grid">
+				<div class="contact-form">
+					<form id="contact-form" aria-label="Contact form">
+						<div class="form-group">
+							<label for="full-name">Full Name <span aria-label="required">*</span></label>
+							<input 
+								id="full-name" 
+									name="full-name"
+								type="text" 
+								placeholder="Your full name" 
+								required
+								aria-required="true"
+							/>
+						</div>
+						<div class="form-row">
+							<div class="form-group">
+								<label for="phone">Phone <span aria-label="required">*</span></label>
+								<input 
+									id="phone" 
+									name="phone"
+									type="tel" 
+									placeholder="(570) 123-4567" 
+									required
+									aria-required="true"
+								/>
+							</div>
+							<div class="form-group">
+								<label for="email">Email <span aria-label="required">*</span></label>
+								<input 
+									id="email" 
+									name="email"
+									type="email" 
+									placeholder="you@example.com" 
+									required
+									aria-required="true"
+								/>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group">
+								<label for="service-preference">Service preference</label>
+								<select id="service-preference" name="servicePreference">
+									<option>Wash, dry & fold</option>
+									<option>Pickup and delivery</option>
+									<option>Subscription</option>
+									<option>Commercial laundry</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="contact-preference">Preferred reply</label>
+								<select id="contact-preference" name="contactPreference">
+									<option>Phone call</option>
+									<option>Text message</option>
+									<option>Email</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group">
+								<label for="city">City</label>
+								<input 
+									id="city" 
+									name="city"
+									type="text" 
+									placeholder="Altoona" 
+								/>
+							</div>
+							<div class="form-group">
+								<label for="question-type">Question Type</label>
+								<select id="question-type" name="question-type">
+									<option>Select a topic</option>
+									<option>General Inquiry</option>
+									<option>Billing</option>
+									<option>Technical</option>
+									<option>Other</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="message">Message <span aria-label="required">*</span></label>
+							<textarea 
+								id="message" 
+								name="message"
+								placeholder="How can we help you?" 
+								rows="6"
+								required
+								aria-required="true"
+							></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">Send Message</button>
+						<p id="contact-status" role="status" aria-live="polite"></p>
+					</form>
+				</div>
+
+				<div class="contact-info">
+					<div class="info-box">
+						<h3><span aria-hidden="true">📞</span> Call or Text</h3>
+						<p><a href="tel:5704947523">(570) 494-7523</a></p>
+						<p>We're here to help!</p>
+					</div>
+
+					<div class="info-box">
+						<h3><span aria-hidden="true">📧</span> Email Us</h3>
+						<p><a href="mailto:info@freshfoldaltoona.com">info@freshfoldaltoona.com</a></p>
+						<p>We'll get back to you within a few hours.</p>
+					</div>
+
+					<div class="info-box">
+						<h3><span aria-hidden="true">⏰</span> Service Hours</h3>
+						<p><strong>Mon - Fri:</strong> 7:00 AM - 7:00 PM</p>
+						<p><strong>Saturday:</strong> 8:00 AM - 2:00 PM</p>
+						<p><strong>Sunday:</strong> Closed</p>
+					</div>
+
+					<div class="info-box">
+						<h3><span aria-hidden="true">📍</span> Service Areas</h3>
+						<ul>
+							<li>Altoona - Holidaysburg</li>
+							<li>Duncansville - Tyrone</li>
+							<li>State College - Lock Haven</li>
+							<li>and surrounding areas</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Service Details -->
+	<section class="service-details">
+		<div class="container">
+			<h2>Our Service Area</h2>
+			<p class="section-subtitle">We proudly serve homes, students, and businesses across Central Pennsylvania.</p>
+			<div class="service-map">
+					<iframe title="Fresh Fold service area from Altoona to Lock Haven" src="https://www.openstreetmap.org/export/embed.html?bbox=-78.75%2C40.80%2C-77.30%2C41.35&amp;layer=mapnik&amp;marker=40.81%2C-78.40" loading="lazy"></iframe>
+			</div>
+			<p class="map-note">Not sure if we service your area? <a href="/service-areas">Check your availability</a> or reach out to us directly!</p>
+		</div>
+	</section>
+
+	<script>
+		const contactForm = document.querySelector<HTMLFormElement>('#contact-form');
+		const contactStatus = document.querySelector<HTMLElement>('#contact-status');
+		contactForm?.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const data = new FormData(contactForm);
+			const subject = `Website inquiry from ${data.get('full-name')}`;
+			const body = [
+				`Name: ${data.get('full-name')}`,
+				`Phone: ${data.get('phone')}`,
+				`Email: ${data.get('email')}`,
+				`City: ${data.get('city') || 'Not provided'}`,
+				`Question type: ${data.get('question-type')}`,
+				`Service preference: ${data.get('servicePreference')}`,
+				`Preferred reply: ${data.get('contactPreference')}`,
+				'',
+				`Message: ${data.get('message')}`,
+			].join('\n');
+			window.location.href = `mailto:info@freshfoldaltoona.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+			if (contactStatus) contactStatus.textContent = 'Your email app is opening with the message details addressed to info@freshfoldaltoona.com.';
+		});
+	</script>
+
+	<!-- Trust Section -->
+	<section class="trust-section">
+		<div class="container">
+			<h2>Why Trust Fresh Fold?</h2>
+			<div class="trust-grid">
+				<div class="trust-item">
+					<div class="trust-icon">✓</div>
+					<h3>Local & Trusted</h3>
+					<p>Central PA Owned</p>
+				</div>
+				<div class="trust-item">
+					<div class="trust-icon">✓</div>
+					<h3>Reliable & On-Time</h3>
+					<p>Count on our routes</p>
+				</div>
+				<div class="trust-item">
+					<div class="trust-icon">✓</div>
+					<h3>Care in Every Load</h3>
+					<p>Treated like our own</p>
+				</div>
+				<div class="trust-item">
+					<div class="trust-icon">✓</div>
+					<h3>Transparent Pricing</h3>
+					<p>No hidden fees, ever</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="final-cta">
+		<div class="container">
+			<h2>Ready to experience laundry day the easy way?</h2>
+			<p>Book a pickup or start a subscription today.</p>
+			<div class="cta-buttons">
+				<a href="/book-pickup" class="btn btn-primary">Book Pickup</a>
+				<a href="/subscriptions" class="btn btn-secondary">Start Subscription</a>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		background: linear-gradient(135deg, #f0f4f8 0%, #e8f2f8 100%);
+		padding: 60px 0;
+		text-align: center;
+	}
+
+	.hero h1 {
+		color: #001f3f;
+		margin-bottom: 15px;
+	}
+
+	.hero p {
+		color: #666;
+		font-size: 1.1rem;
+	}
+
+	.cta-buttons-section {
+		padding: 30px 0;
+		background-color: white;
+		text-align: center;
+	}
+
+	.cta-buttons-section .cta-buttons {
+		display: flex;
+		gap: 15px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.cta-buttons-section .btn {
+		min-width: 180px;
+	}
+
+	.faq-section {
+		padding: 60px 0;
+		background-color: #f9f9f9;
+	}
+
+	.faq-section h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.faq-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 30px;
+	}
+
+	.faq-category h3 {
+		color: #001f3f;
+		margin-bottom: 20px;
+		padding-bottom: 10px;
+		border-bottom: 2px solid #00a0c6;
+	}
+
+	.faq-items {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.faq-item {
+		background: white;
+		border-radius: 6px;
+		overflow: hidden;
+		border: 1px solid #e0e0e0;
+	}
+
+	.faq-item summary {
+		padding: 15px;
+		cursor: pointer;
+		font-weight: 600;
+		color: #333;
+		user-select: none;
+		transition: all 0.3s;
+	}
+
+	.faq-item summary:hover {
+		background-color: #f0f4f8;
+		color: #00a0c6;
+	}
+
+	.faq-item[open] summary {
+		background-color: #f0f4f8;
+		color: #00a0c6;
+	}
+
+	.faq-item p {
+		padding: 0 15px 15px;
+		color: #666;
+		line-height: 1.6;
+	}
+
+	.view-all-faq {
+		text-align: center;
+		margin-top: 30px;
+	}
+
+	.view-all-faq a {
+		color: #00a0c6;
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	.contact-section {
+		padding: 60px 0;
+		background-color: white;
+	}
+
+	.contact-section h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 10px;
+	}
+
+	.section-subtitle {
+		text-align: center;
+		color: #666;
+		margin-bottom: 40px;
+	}
+
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		gap: 40px;
+	}
+
+	.contact-form form {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.form-group {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.form-group label {
+		color: #333;
+		font-weight: 600;
+		margin-bottom: 5px;
+	}
+
+	.form-group input,
+	.form-group select,
+	.form-group textarea {
+		padding: 12px 15px;
+		border: 1px solid #e0e0e0;
+		border-radius: 6px;
+		font-size: 1rem;
+		font-family: inherit;
+	}
+
+	.form-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 15px;
+	}
+
+	.contact-form button {
+		align-self: flex-start;
+		min-width: 200px;
+	}
+
+	.contact-info {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.info-box {
+		background: white;
+		padding: 20px;
+		border-radius: 6px;
+		border: 1px solid #e0e0e0;
+	}
+
+	.info-box h3 {
+		color: #001f3f;
+		margin-bottom: 10px;
+	}
+
+	.info-box p {
+		color: #666;
+		margin-bottom: 5px;
+		font-size: 0.95rem;
+	}
+
+	.info-box a {
+		color: #00a0c6;
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	.info-box ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	.info-box ul li {
+		color: #666;
+		margin-bottom: 5px;
+		font-size: 0.95rem;
+	}
+
+	.service-details {
+		padding: 60px 0;
+		background-color: #f9f9f9;
+	}
+
+	.service-details h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 10px;
+	}
+
+	.service-map {
+		margin: 40px 0 20px;
+	}
+
+	.map-placeholder {
+		width: 100%;
+		aspect-ratio: 16/9;
+		background: white;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	.service-map iframe {
+		display: block;
+		width: 100%;
+		height: 520px;
+		border: 0;
+		border-radius: 8px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	.map-placeholder svg {
+		width: 100%;
+		height: 100%;
+	}
+
+	.map-note {
+		text-align: center;
+		color: #666;
+		font-size: 0.95rem;
+	}
+
+	.map-note a {
+		color: #00a0c6;
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	.trust-section {
+		padding: 60px 0;
+	}
+
+	.trust-section h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.trust-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 30px;
+	}
+
+	.trust-item {
+		text-align: center;
+	}
+
+	.trust-icon {
+		font-size: 2.5rem;
+		color: #00a0c6;
+		font-weight: 700;
+		display: block;
+		margin-bottom: 15px;
+	}
+
+	.trust-item h3 {
+		color: #001f3f;
+		margin-bottom: 8px;
+	}
+
+	.trust-item p {
+		color: #666;
+	}
+
+	.final-cta {
+		background: linear-gradient(135deg, #0066a1 0%, #00a0c6 100%);
+		color: white;
+		text-align: center;
+		padding: 80px 0;
+	}
+
+	.final-cta h2 {
+		color: white;
+		margin-bottom: 10px;
+	}
+
+	.final-cta p {
+		font-size: 1.1rem;
+		margin-bottom: 30px;
+		opacity: 0.95;
+	}
+
+	.final-cta .cta-buttons {
+		display: flex;
+		gap: 15px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.final-cta .btn {
+		min-width: 180px;
+	}
+
+	@media (max-width: 768px) {
+		.service-map iframe {
+			height: 420px;
+		}
+
+		.contact-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.form-row {
+			grid-template-columns: 1fr;
+		}
+
+		.cta-buttons-section .cta-buttons {
+			flex-direction: column;
+		}
+
+		.cta-buttons-section .btn {
+			min-width: auto;
+		}
+
+		.final-cta .cta-buttons {
+			flex-direction: column;
+		}
+
+		.final-cta .btn {
+			min-width: auto;
+		}
+
+		.faq-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

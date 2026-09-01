@@ -1,0 +1,988 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const selectedPlan = Astro.url.searchParams.get('plan') ?? '';
+const status = Astro.url.searchParams.get('status');
+const message = Astro.url.searchParams.get('message');
+---
+
+<Layout
+	title="Book Laundry Pickup Online | Fresh Fold Delivery"
+	description="Book laundry pickup online with Fresh Fold Delivery for Central PA wash, dry, fold service, delivery options, add-ons, and commercial laundry requests."
+	canonicalPath="/book-pickup"
+>
+	<!-- Hero Section -->
+	<section class="hero">
+		<div class="container">
+			<div class="hero-content">
+				<div class="hero-text">
+					<h1>Book Your Laundry Pickup</h1>
+					<p>Fresh, folded, and delivered—done right.</p>
+					<p>Complete your request and continue to secure Wix Payments checkout for one-time pickup service.</p>
+					<ul class="hero-features">
+						<li>✓ On-time, every time - Reliable local drivers</li>
+						<li>✓ Fresh & clean - Premium care</li>
+						<li>✓ Satisfaction guaranteed - Love it or we'll make it right</li>
+					</ul>
+				</div>
+				<div class="hero-image">
+					<div class="placeholder-image">
+						<!-- Hero image would go here -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Booking Form -->
+	<section class="booking-form-section">
+		<div class="container">
+			<div class="booking-wrapper">
+				{status && message && (
+					<div class={`notice ${status === 'success' ? 'success' : 'error'}`}>
+						{message}
+					</div>
+				)}
+				<div class="form-steps">
+					<div class="steps-header">
+						<div class="step-number active">1</div>
+						<span>Customer Type</span>
+						<div class="step-number">2</div>
+						<span>Address / ZIP</span>
+						<div class="step-number">3</div>
+						<span>Laundry Estimate</span>
+						<div class="step-number">4</div>
+						<span>Pickup Window</span>
+						<div class="step-number">5</div>
+						<span>Preferences / Add-ons</span>
+						<div class="step-number">6</div>
+						<span>Review & Payment</span>
+					</div>
+
+					<form class="booking-form" method="POST" action="/api/book-pickup" novalidate>
+						<input type="hidden" name="plan" value={selectedPlan} />
+						<!-- Step 1: Customer Type -->
+						<div class="form-section active">
+							<h2>Customer Type</h2>
+							<p>Let us know who we're picking up for.</p>
+							<div class="radio-group">
+								<label class="radio-option">
+									<input type="radio" name="customer_type" value="residential" checked />
+									<div class="option-content">
+										<h3>👤 Residential</h3>
+										<p>For homes, apartments, and individuals.</p>
+									</div>
+								</label>
+								<label class="radio-option">
+									<input type="radio" name="customer_type" value="commercial" />
+									<div class="option-content">
+										<h3>💼 Commercial</h3>
+										<p>For businesses, Airbnb, VRBO, and more.</p>
+									</div>
+								</label>
+							</div>
+						</div>
+
+						<!-- Step 2: Address / ZIP -->
+						<div class="form-section">
+							<h2>Address / ZIP</h2>
+							<p>We'll confirm your service area, route availability, and delivery estimate.</p>
+							<div class="form-group">
+								<label>Full Name</label>
+								<input type="text" name="fullName" placeholder="Enter your full name" required />
+							</div>
+							<div class="form-group">
+								<label>Phone Number</label>
+								<input type="tel" name="phone" placeholder="(XXX) XXX-XXXX" required />
+							</div>
+							<div class="form-group">
+								<label>Email Address</label>
+								<input type="email" name="email" placeholder="you@example.com" required />
+							</div>
+							<div class="form-row">
+								<div class="form-group">
+									<label>ZIP Code</label>
+									<input type="text" name="zipCode" placeholder="16601" required />
+								</div>
+								<div class="form-group">
+									<label>Laundry Type</label>
+									<select name="laundryType">
+										<option>Select a type</option>
+										<option>Standard</option>
+										<option>Wash & Fold</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<!-- Step 3: Laundry Estimate -->
+						<div class="form-section">
+							<h2>Laundry Estimate</h2>
+							<p>Pick your laundry weight estimate for accurate pricing.</p>
+							<div class="weight-selector">
+								<div class="weight-option">
+									<input type="radio" name="estimatedWeight" value="20" checked />
+									<label>20 lbs</label>
+								</div>
+								<div class="weight-option">
+									<input type="radio" name="estimatedWeight" value="50" />
+									<label>50 lbs</label>
+								</div>
+								<div class="weight-option">
+									<input type="radio" name="estimatedWeight" value="100" />
+									<label>100 lbs</label>
+								</div>
+								<div class="weight-option">
+									<input type="radio" name="estimatedWeight" value="custom" />
+									<label>Custom Weight</label>
+									<input class="custom-weight" type="number" name="customWeight" min="1" max="1000" placeholder="Enter weight in lbs" disabled />
+								</div>
+							</div>
+						</div>
+
+						<!-- Step 4: Pickup Window -->
+						<div class="form-section">
+							<h2>Pickup Window</h2>
+							<p>Choose your pickup window.</p>
+							<div class="pickup-options">
+								<label class="pickup-option">
+									<input type="radio" name="pickupWindow" value="morning" />
+									<span>⏰ Early Morning (6:00 - 9:00 AM)</span>
+								</label>
+								<label class="pickup-option">
+									<input type="radio" name="pickupWindow" value="afternoon" />
+									<span>☀️ Afternoon (12:00 - 3:00 PM)</span>
+								</label>
+								<label class="pickup-option">
+									<input type="radio" name="pickupWindow" value="evening" />
+									<span>🌅 Evening (5:00 - 7:00 PM)</span>
+								</label>
+							</div>
+						</div>
+
+						<!-- Step 5: Preferences -->
+						<div class="form-section">
+							<h2>Preferences / Add-ons</h2>
+							<div class="preferences">
+								<label class="checkbox-option">
+									<input type="checkbox" name="hypoallergenicDetergent" />
+									<span>Hypoallergenic Detergent (+$0.25/lb)</span>
+								</label>
+								<label class="checkbox-option">
+									<input type="checkbox" name="scentBooster" />
+									<span>Scent Booster (+$3/order)</span>
+								</label>
+								<label class="checkbox-option">
+									<input type="checkbox" name="separateWhitesColors" />
+									<span>Separate Whites / Colors (+$5/order)</span>
+								</label>
+								<label class="checkbox-option">
+									<input type="checkbox" name="hangDry" />
+									<span>Hang Dry (+$1/item)</span>
+								</label>
+								<div class="form-group hang-dry-quantity" hidden>
+									<label for="hangDryItems">Number of hang-dry items</label>
+									<input id="hangDryItems" type="number" name="hangDryItems" min="1" max="100" value="1" />
+								</div>
+							</div>
+						</div>
+
+						<!-- Step 6: Review & Payment -->
+						<div class="form-section">
+							<h2>Review & Payment</h2>
+							<div class="order-summary">
+								<div class="summary-item">
+									<span>Laundry Rate</span>
+									<span>$1.89/lb</span>
+								</div>
+								<div class="summary-item">
+									<span>Estimated Weight</span>
+									<span data-summary="weight">20 lbs</span>
+								</div>
+								<div class="summary-item">
+									<span>Pickup & delivery</span>
+									<span>$3.80</span>
+								</div>
+								<div class="summary-item" data-addons-row hidden><span>Add-ons</span><span data-summary="addons">$0.00</span></div>
+								<div class="summary-item total">
+									<span>Total due</span>
+									<span data-summary="total">$53.60</span>
+								</div>
+								<p class="summary-note">This is your final quoted price based on the selections above. Any change you request later will be confirmed with you first.</p>
+							</div>
+							<input type="hidden" name="quotedTotal" value="53.60" />
+							<input type="hidden" name="quotedWeight" value="20" />
+							<div class="payment-options">
+								<button type="submit" name="paymentMethod" value="online" class="btn btn-primary">Pay online — <span data-summary="pay-total">$53.60</span></button>
+								<a class="btn btn-secondary contact-payment whatsapp-payment" href="https://wa.me/15704947523" target="_blank" rel="noopener">Message us on WhatsApp</a>
+								<a class="btn btn-secondary contact-payment email-payment" href="mailto:info@freshfoldaltoona.com">Send us an email</a>
+							</div>
+							<p class="payment-help">Choose online payment or send the same quote to our team by WhatsApp or email.</p>
+						</div>
+
+						<!-- Navigation -->
+						<div class="form-nav">
+							<button type="button" class="btn btn-secondary prev-btn">← Previous</button>
+							<button type="button" class="btn btn-primary next-btn">Next →</button>
+						</div>
+					</form>
+				</div>
+
+				<!-- Order Summary Sidebar -->
+				<div class="order-summary-sidebar">
+					<h3>Your Order</h3>
+					<div class="summary-details">
+						<div class="summary-row">
+							<span>Laundry Rate</span>
+							<span class="price">$1.89/lb</span>
+						</div>
+						<div class="summary-row">
+							<span>Estimated Weight</span>
+							<span data-summary="weight">20 lbs</span>
+						</div>
+						<div class="summary-row">
+							<span>Pickup & delivery</span>
+							<span class="price">$3.80</span>
+						</div>
+						<div class="summary-row" data-addons-row hidden><span>Add-ons</span><span class="price" data-summary="addons">$0.00</span></div>
+						<div class="summary-row total">
+							<span>Total due</span>
+							<span class="total-price" data-summary="total">$53.60</span>
+						</div>
+					</div>
+					<p class="summary-note">Your total updates instantly as you choose your service and add-ons.</p>
+					<div class="security-badge">
+						<p>🔒 <strong>Secure & Easy Payments</strong></p>
+						<p>Your payment is encrypted and secure. We never store your card details.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- How It Works -->
+	<section class="how-it-works">
+		<div class="container">
+			<h2>How It Works in 6 Easy Steps</h2>
+			<div class="steps-visual">
+				<div class="step">
+					<div class="step-icon">1</div>
+					<h3>Choose Type</h3>
+					<p>Tell us about your laundry needs.</p>
+				</div>
+				<div class="arrow">→</div>
+				<div class="step">
+					<div class="step-icon">2</div>
+					<h3>Ask Address</h3>
+					<p>We'll confirm your location.</p>
+				</div>
+				<div class="arrow">→</div>
+				<div class="step">
+					<div class="step-icon">3</div>
+					<h3>Quick Weight Estimate</h3>
+					<p>Help us estimate the weight.</p>
+				</div>
+				<div class="arrow">→</div>
+				<div class="step">
+					<div class="step-icon">4</div>
+					<h3>Choose Time</h3>
+					<p>Pick your pickup window.</p>
+				</div>
+				<div class="arrow">→</div>
+				<div class="step">
+					<div class="step-icon">5</div>
+					<h3>Add Preferences</h3>
+					<p>Select add-ons if desired.</p>
+				</div>
+				<div class="arrow">→</div>
+				<div class="step">
+					<div class="step-icon">6</div>
+					<h3>Review & Pay</h3>
+					<p>Confirm and pay securely.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Info Section -->
+	<section class="info-section">
+		<div class="container">
+			<div class="info-grid">
+				<div class="info-item">
+					<h3>📋 Proudly Serving Central PA</h3>
+					<p>Altoona - State College - Lock Haven</p>
+					<p style="font-size: 0.9rem; color: #999;">Daily service in Altoona & State College Weekly route to Lock Haven</p>
+				</div>
+				<div class="info-item">
+					<h3>🏠 Perfect For Everyone</h3>
+					<ul>
+						<li>Homes & apartments</li>
+						<li>Students</li>
+						<li>Busy professionals</li>
+						<li>Airbnb hosts</li>
+					</ul>
+				</div>
+				<div class="info-item">
+					<h3>💬 Questions?</h3>
+					<p>📞 <a href="tel:5704947523">(570) 494-7523</a></p>
+					<p>📧 <a href="mailto:info@freshfoldaltoona.com">info@freshfoldaltoona.com</a></p>
+					<p style="font-size: 0.9rem; margin-top: 10px;">Available Mon-Fri 7AM-7PM, Sat 8AM-2PM</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>('.booking-form');
+	const sections = Array.from(document.querySelectorAll<HTMLElement>('.form-section'));
+	const stepNumbers = Array.from(document.querySelectorAll<HTMLElement>('.step-number'));
+	const nextButton = document.querySelector<HTMLButtonElement>('.next-btn');
+	const previousButton = document.querySelector<HTMLButtonElement>('.prev-btn');
+	const customWeight = document.querySelector<HTMLInputElement>('.custom-weight');
+	const hangDry = form?.querySelector<HTMLInputElement>('input[name="hangDry"]');
+	const hangDryQuantity = document.querySelector<HTMLElement>('.hang-dry-quantity');
+	const hangDryItems = form?.querySelector<HTMLInputElement>('input[name="hangDryItems"]');
+	let currentStep = 0;
+
+	const money = (amount: number) => `$${amount.toFixed(2)}`;
+
+	function getWeight() {
+		const selected = form?.querySelector<HTMLInputElement>('input[name="estimatedWeight"]:checked');
+		if (!selected) return 20;
+		if (selected.value === 'custom') return Math.max(1, Number(customWeight?.value) || 0);
+		return Number(selected.value);
+	}
+
+	function updateQuote() {
+		if (!form) return;
+		const weight = getWeight();
+		const hypoallergenic = form.querySelector<HTMLInputElement>('input[name="hypoallergenicDetergent"]')?.checked ? weight * 0.25 : 0;
+		const scentBooster = form.querySelector<HTMLInputElement>('input[name="scentBooster"]')?.checked ? 3 : 0;
+		const separate = form.querySelector<HTMLInputElement>('input[name="separateWhitesColors"]')?.checked ? 5 : 0;
+		const hangDryCost = hangDry?.checked ? (Math.max(1, Number(hangDryItems?.value) || 1)) : 0;
+		const addOns = hypoallergenic + scentBooster + separate + hangDryCost;
+		const total = (weight * 1.89) + 3.8 + addOns;
+
+		document.querySelectorAll<HTMLElement>('[data-summary="weight"]').forEach((item) => item.textContent = `${weight} lbs`);
+		document.querySelectorAll<HTMLElement>('[data-summary="addons"]').forEach((item) => item.textContent = money(addOns));
+		document.querySelectorAll<HTMLElement>('[data-summary="total"], [data-summary="pay-total"]').forEach((item) => item.textContent = money(total));
+		document.querySelectorAll<HTMLElement>('[data-addons-row]').forEach((row) => row.hidden = addOns === 0);
+		const totalField = form.querySelector<HTMLInputElement>('input[name="quotedTotal"]');
+		const weightField = form.querySelector<HTMLInputElement>('input[name="quotedWeight"]');
+		if (totalField) totalField.value = total.toFixed(2);
+		if (weightField) weightField.value = String(weight);
+		updateContactLinks(weight, addOns, total);
+	}
+
+	function updateContactLinks(weight: number, addOns: number, total: number) {
+		if (!form) return;
+		const data = new FormData(form);
+		const customer = String(data.get('fullName') || 'a customer');
+		const pickup = String(data.get('pickupWindow') || 'not selected');
+		const addOnText = addOns ? `Add-ons: ${money(addOns)}.` : 'No add-ons.';
+		const message = `Hello Fresh Fold! I would like to book a laundry pickup. Name: ${customer}. Weight: ${weight} lbs. Pickup window: ${pickup}. ${addOnText} Final quote: ${money(total)}.`;
+		const whatsapp = document.querySelector<HTMLAnchorElement>('.whatsapp-payment');
+		const email = document.querySelector<HTMLAnchorElement>('.email-payment');
+		if (whatsapp) whatsapp.href = `https://wa.me/15704947523?text=${encodeURIComponent(message)}`;
+		if (email) {
+			email.href = `mailto:info@freshfoldaltoona.com?subject=${encodeURIComponent('Laundry pickup request')}&body=${encodeURIComponent(message)}`;
+		}
+	}
+
+	function showStep(step: number) {
+		currentStep = Math.max(0, Math.min(step, sections.length - 1));
+		sections.forEach((section, index) => section.classList.toggle('active', index === currentStep));
+		stepNumbers.forEach((number, index) => number.classList.toggle('active', index <= currentStep));
+		if (previousButton) previousButton.hidden = currentStep === 0;
+		if (nextButton) nextButton.hidden = currentStep === sections.length - 1;
+	}
+
+	function currentStepIsValid() {
+		const section = sections[currentStep];
+		const fields = Array.from(section.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input:not([disabled]), select:not([disabled])'));
+		for (const field of fields) {
+			if (!field.checkValidity()) {
+				field.reportValidity();
+				return false;
+			}
+		}
+		return true;
+	}
+
+	form?.addEventListener('input', updateQuote);
+	form?.addEventListener('change', (event) => {
+		const target = event.target as HTMLInputElement;
+		if (target.name === 'estimatedWeight' && customWeight) {
+			const isCustom = target.value === 'custom' && target.checked;
+			customWeight.disabled = !isCustom;
+			customWeight.required = isCustom;
+			if (isCustom) customWeight.focus();
+		}
+		if (target.name === 'hangDry' && hangDryQuantity && hangDryItems) {
+			hangDryQuantity.hidden = !target.checked;
+			hangDryItems.required = target.checked;
+		}
+		updateQuote();
+	});
+	nextButton?.addEventListener('click', () => {
+		if (currentStepIsValid()) showStep(currentStep + 1);
+	});
+	previousButton?.addEventListener('click', () => showStep(currentStep - 1));
+	form?.addEventListener('submit', (event) => {
+		for (let index = 0; index < sections.length - 1; index += 1) {
+			currentStep = index;
+			if (!currentStepIsValid()) {
+				event.preventDefault();
+				showStep(index);
+				return;
+			}
+		}
+	});
+	showStep(0);
+	updateQuote();
+</script>
+
+<style>
+	.hero {
+		background: linear-gradient(135deg, #f0f4f8 0%, #e8f2f8 100%);
+		padding: 60px 0;
+	}
+
+	.hero-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 50px;
+		align-items: center;
+	}
+
+	.hero-text h1 {
+		color: #001f3f;
+		margin-bottom: 10px;
+	}
+
+	.hero-text p {
+		color: #666;
+		font-size: 1.05rem;
+		margin-bottom: 10px;
+	}
+
+	.hero-features {
+		list-style: none;
+		margin-top: 20px;
+	}
+
+	.hero-features li {
+		color: #666;
+		margin-bottom: 12px;
+		font-size: 0.95rem;
+	}
+
+	.placeholder-image {
+		width: 100%;
+		aspect-ratio: 1;
+		background: linear-gradient(135deg, #e8f2f8 0%, #d4e6f1 100%);
+		border-radius: 8px;
+	}
+
+	.booking-form-section {
+		padding: 60px 0;
+		background-color: #f9f9f9;
+	}
+
+	.notice {
+		margin-bottom: 20px;
+		padding: 12px 16px;
+		border-radius: 8px;
+		font-weight: 600;
+	}
+
+	.notice.success {
+		background: #e8f7ed;
+		color: #17633a;
+	}
+
+	.notice.error {
+		background: #fdebea;
+		color: #b42318;
+	}
+
+	.booking-wrapper {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		gap: 40px;
+	}
+
+	.form-steps {
+		background: white;
+		padding: 40px;
+		border-radius: 8px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	.steps-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 40px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #e0e0e0;
+		gap: 5px;
+		font-size: 0.75rem;
+	}
+
+	.step-number {
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #e0e0e0;
+		color: #666;
+		font-weight: 700;
+	}
+
+	.step-number.active {
+		background-color: #00a0c6;
+		color: white;
+	}
+
+	.form-section {
+		display: none;
+	}
+
+	.form-section.active {
+		display: block;
+	}
+
+	.form-section h2 {
+		color: #001f3f;
+		margin-bottom: 15px;
+	}
+
+	.form-section p {
+		color: #666;
+		margin-bottom: 20px;
+	}
+
+	.radio-group {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 15px;
+		margin-bottom: 30px;
+	}
+
+	.radio-option {
+		position: relative;
+		cursor: pointer;
+	}
+
+	.radio-option input {
+		position: absolute;
+		opacity: 0;
+	}
+
+	.option-content {
+		padding: 20px;
+		border: 2px solid #e0e0e0;
+		border-radius: 8px;
+		transition: all 0.3s;
+	}
+
+	.radio-option input:checked + .option-content {
+		border-color: #00a0c6;
+		background-color: #f0f4f8;
+	}
+
+	.option-content h3 {
+		color: #001f3f;
+		margin-bottom: 5px;
+		font-size: 1rem;
+	}
+
+	.option-content p {
+		color: #666;
+		font-size: 0.9rem;
+		margin: 0;
+	}
+
+	.form-group {
+		margin-bottom: 15px;
+	}
+
+	.form-group label {
+		display: block;
+		color: #333;
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
+
+	.form-group input,
+	.form-group select {
+		width: 100%;
+		padding: 12px 15px;
+		border: 1px solid #e0e0e0;
+		border-radius: 6px;
+		font-size: 1rem;
+	}
+
+	.form-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 15px;
+	}
+
+	.weight-selector {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 15px;
+		margin-bottom: 30px;
+	}
+
+	.weight-option {
+		position: relative;
+		padding: 15px;
+		border: 2px solid #e0e0e0;
+		border-radius: 6px;
+		cursor: pointer;
+		text-align: center;
+		transition: all 0.3s;
+	}
+
+	.weight-option input[type="radio"] {
+		position: absolute;
+		opacity: 0;
+	}
+
+	.weight-option label {
+		cursor: pointer;
+		margin: 0;
+		font-weight: 600;
+	}
+
+	.weight-option input[type="radio"]:checked + label {
+		color: #00a0c6;
+	}
+
+	.weight-option input[type="radio"]:checked ~ input {
+		display: block;
+	}
+
+	.custom-weight {
+		display: none;
+		width: 100%;
+		margin-top: 12px;
+		padding: 10px;
+		border: 1px solid #d4d4d4;
+		border-radius: 4px;
+	}
+
+	.pickup-options {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.pickup-option {
+		padding: 15px;
+		border: 2px solid #e0e0e0;
+		border-radius: 6px;
+		cursor: pointer;
+		transition: all 0.3s;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.pickup-option input {
+		margin: 0;
+		cursor: pointer;
+	}
+
+	.pickup-option:has(input:checked) {
+		border-color: #00a0c6;
+		background-color: #f0f4f8;
+	}
+
+	.preferences {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.checkbox-option {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		cursor: pointer;
+	}
+
+	.checkbox-option input {
+		margin: 0;
+		cursor: pointer;
+	}
+
+	.order-summary {
+		background-color: #f9f9f9;
+		padding: 20px;
+		border-radius: 6px;
+		margin-bottom: 20px;
+	}
+
+	.summary-item {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 10px;
+		color: #666;
+	}
+
+	.summary-item.total {
+		font-weight: 700;
+		color: #001f3f;
+		border-top: 2px solid #e0e0e0;
+		padding-top: 10px;
+		margin-top: 10px;
+	}
+
+	.summary-note {
+		color: #999;
+		font-size: 0.85rem;
+		margin: 10px 0 0;
+	}
+
+	.form-nav {
+		display: flex;
+		gap: 15px;
+		justify-content: space-between;
+		margin-top: 30px;
+		padding-top: 20px;
+		border-top: 1px solid #e0e0e0;
+	}
+
+	.form-nav button {
+		flex: 1;
+	}
+
+	.payment-options {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+	}
+
+	.payment-options .btn {
+		width: 100%;
+		text-align: center;
+	}
+
+	.contact-payment {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.payment-help {
+		margin: 14px 0 0;
+		font-size: 0.85rem;
+		text-align: center;
+	}
+
+	.order-summary-sidebar {
+		background: white;
+		padding: 25px;
+		border-radius: 8px;
+		height: fit-content;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	.order-summary-sidebar h3 {
+		color: #001f3f;
+		margin-bottom: 20px;
+		padding-bottom: 15px;
+		border-bottom: 2px solid #00a0c6;
+	}
+
+	.summary-details {
+		margin-bottom: 20px;
+	}
+
+	.summary-row {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 0;
+		border-bottom: 1px solid #f0f0f0;
+		color: #666;
+	}
+
+	.summary-row.total {
+		font-weight: 700;
+		color: #001f3f;
+		font-size: 1.1rem;
+		border: none;
+		border-top: 2px solid #e0e0e0;
+		padding-top: 15px;
+		margin-top: 15px;
+	}
+
+	.price {
+		color: #00a0c6;
+		font-weight: 600;
+	}
+
+	.total-price {
+		color: #00a0c6;
+		font-size: 1.3rem;
+	}
+
+	.security-badge {
+		background-color: #f0f4f8;
+		padding: 15px;
+		border-radius: 6px;
+		border-left: 4px solid #00a0c6;
+	}
+
+	.security-badge p {
+		margin: 0 0 5px;
+		font-size: 0.9rem;
+		color: #333;
+	}
+
+	.security-badge p:last-child {
+		margin: 0;
+		color: #666;
+		font-size: 0.85rem;
+	}
+
+	.how-it-works {
+		padding: 60px 0;
+	}
+
+	.how-it-works h2 {
+		text-align: center;
+		color: #001f3f;
+		margin-bottom: 40px;
+	}
+
+	.steps-visual {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 10px;
+		align-items: center;
+	}
+
+	.step {
+		text-align: center;
+	}
+
+	.step-icon {
+		width: 50px;
+		height: 50px;
+		background-color: #00a0c6;
+		color: white;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 700;
+		font-size: 1.3rem;
+		margin: 0 auto 12px;
+	}
+
+	.step h3 {
+		color: #001f3f;
+		font-size: 0.95rem;
+		margin-bottom: 5px;
+	}
+
+	.step p {
+		color: #666;
+		font-size: 0.85rem;
+	}
+
+	.arrow {
+		text-align: center;
+		color: #999;
+		font-size: 1.5rem;
+	}
+
+	.info-section {
+		background-color: #f9f9f9;
+		padding: 60px 0;
+	}
+
+	.info-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 30px;
+	}
+
+	.info-item h3 {
+		color: #001f3f;
+		margin-bottom: 12px;
+	}
+
+	.info-item p {
+		color: #666;
+		margin-bottom: 8px;
+	}
+
+	.info-item ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	.info-item ul li {
+		color: #666;
+		margin-bottom: 6px;
+	}
+
+	.info-item a {
+		color: #00a0c6;
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	@media (max-width: 768px) {
+		.hero-content {
+			grid-template-columns: 1fr;
+		}
+
+		.booking-wrapper {
+			grid-template-columns: 1fr;
+		}
+
+		.steps-header {
+			flex-wrap: wrap;
+			gap: 8px;
+		}
+
+		.steps-visual {
+			grid-template-columns: 1fr;
+			gap: 15px;
+		}
+
+		.arrow {
+			display: none;
+		}
+
+		.radio-group {
+			grid-template-columns: 1fr;
+		}
+
+		.weight-selector {
+			grid-template-columns: 1fr;
+		}
+
+		.form-row {
+			grid-template-columns: 1fr;
+		}
+
+		.payment-options {
+			grid-template-columns: 1fr;
+		}
+
+		.order-summary-sidebar {
+			height: auto;
+		}
+	}
+</style>

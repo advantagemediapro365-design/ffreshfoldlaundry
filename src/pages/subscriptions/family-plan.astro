@@ -1,0 +1,29 @@
+---
+import SubscriptionPlanDetail from '../../components/SubscriptionPlanDetail.astro';
+---
+
+<SubscriptionPlanDetail
+	planName="Family Plan"
+	planSlug="family-plan"
+	monthlyPrice="$229"
+	includedPounds="150 lb/month"
+	overageRate="$1.65/lb"
+	idealFor="Families and larger households with steady laundry volume"
+	description="A higher-capacity plan for households that need a more substantial monthly allowance and a recurring pickup routine."
+	canonicalPath="/subscriptions/family-plan"
+	highlights={[
+		'Best for families with regular laundry needs across multiple people.',
+		'Includes enough monthly laundry to support a busy household comfortably.',
+		'Keeps the cost per pound lower than smaller plans when you use more laundry.'
+	]}
+	howItWorks={[
+		'Choose a recurring pickup schedule that fits your family calendar.',
+		'We process your laundry on a consistent route and return it folded and ready to use.',
+		'Any pounds beyond the included allowance are billed at the overage rate.'
+	]}
+	whoItFits={[
+		'Families with several loads each week.',
+		'Large households that need recurring service with dependable timing.',
+		'Customers who want a plan that grows with their laundry volume.'
+	]}
+/>

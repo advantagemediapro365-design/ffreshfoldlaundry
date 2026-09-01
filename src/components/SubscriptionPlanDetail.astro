@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const {
+  planName,
+  monthlyPrice,
+  includedPounds,
+  overageRate,
+  idealFor,
+  description,
+  highlights = [],
+  howItWorks = [],
+  whoItFits = [],
+	canonicalPath,
+	planSlug,
+} = Astro.props;
+---
+
+<Layout
+	title={`${planName} | Fresh Fold Delivery`}
+	description={`${planName} details for Fresh Fold Delivery, including monthly pricing, included pounds, overage rates, and who the plan is best for.`}
+	canonicalPath={canonicalPath}
+>
+	<section class="hero">
+		<div class="container">
+			<a class="back-link" href="/subscriptions">← Back to all plans</a>
+			<h1>{planName}</h1>
+			<p class="lead">{description}</p>
+			<div class="hero-stats">
+				<div class="stat-card">
+					<span class="stat-label">Monthly price</span>
+					<strong>{monthlyPrice}</strong>
+				</div>
+				<div class="stat-card">
+					<span class="stat-label">Included laundry</span>
+					<strong>{includedPounds}</strong>
+				</div>
+				<div class="stat-card">
+					<span class="stat-label">Overage rate</span>
+					<strong>{overageRate}</strong>
+				</div>
+			</div>
+			<div class="hero-buttons">
+				<a href={`/subscribe?plan=${encodeURIComponent(planSlug)}`} class="btn btn-primary">Choose & pay for this plan</a>
+				<a href="/delivery-pass" class="btn btn-secondary">View Delivery Pass</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="details">
+		<div class="container">
+			<div class="details-grid">
+				<article class="card">
+					<h2>Why this plan works</h2>
+					<ul class="feature-list">
+						{highlights.map((item) => <li>{item}</li>)}
+					</ul>
+				</article>
+				<article class="card">
+					<h2>How it works</h2>
+					<ol class="step-list">
+						{howItWorks.map((step) => <li>{step}</li>)}
+					</ol>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section class="supporting-info">
+		<div class="container">
+			<div class="info-grid">
+				<div class="info-card">
+					<h2>Best for</h2>
+					<p>{idealFor}</p>
+				</div>
+				<div class="info-card">
+					<h2>Who this is a fit for</h2>
+					<ul class="feature-list">
+						{whoItFits.map((item) => <li>{item}</li>)}
+					</ul>
+				</div>
+			</div>
+			<p class="note">Delivery is calculated separately unless Delivery Pass or an approved promotion applies.</p>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		background: linear-gradient(135deg, #f0f4f8 0%, #e8f2f8 100%);
+		padding: 60px 0;
+	}
+
+	.back-link {
+		display: inline-block;
+		margin-bottom: 20px;
+		color: #0066a1;
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.hero h1 {
+		color: #001f3f;
+		margin-bottom: 15px;
+	}
+
+	.lead {
+		color: #666;
+		font-size: 1.08rem;
+		max-width: 760px;
+		line-height: 1.8;
+		margin-bottom: 30px;
+	}
+
+	.hero-stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+		gap: 16px;
+		margin-bottom: 24px;
+	}
+
+	.stat-card {
+		background: white;
+		padding: 18px 20px;
+		border-radius: 8px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.stat-label {
+		color: #666;
+		font-size: 0.95rem;
+	}
+
+	.hero-buttons {
+		display: flex;
+		gap: 12px;
+		flex-wrap: wrap;
+	}
+
+	.details {
+		padding: 50px 0 20px;
+	}
+
+	.details-grid,
+	.info-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 24px;
+	}
+
+	.card,
+	.info-card {
+		background: white;
+		padding: 28px;
+		border-radius: 8px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	.card h2,
+	.info-card h2 {
+		color: #001f3f;
+		margin-bottom: 15px;
+	}
+
+	.feature-list,
+	.step-list {
+		padding-left: 20px;
+		color: #555;
+		line-height: 1.7;
+	}
+
+	.step-list {
+		padding-left: 24px;
+	}
+
+	.supporting-info {
+		padding: 20px 0 60px;
+	}
+
+	.note {
+		margin-top: 24px;
+		color: #666;
+		font-style: italic;
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			padding: 40px 0;
+		}
+
+		.hero-buttons {
+			flex-direction: column;
+		}
+	}
+</style>

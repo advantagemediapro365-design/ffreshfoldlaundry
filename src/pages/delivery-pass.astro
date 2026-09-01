@@ -1,0 +1,283 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Fresh Fold Delivery Pass | Laundry Delivery Membership"
+	description="Fresh Fold Delivery Pass removes the base dispatch fee and gives member mileage pricing for frequent laundry pickup and delivery customers."
+	canonicalPath="/delivery-pass"
+>
+	<section class="hero">
+		<div class="container">
+			<p class="eyebrow">Separate delivery add-on</p>
+			<h1>Fresh Fold Delivery Pass</h1>
+			<p>Use Fresh Fold often? Add Delivery Pass to remove the base dispatch fee and receive member mileage pricing.</p>
+			<div class="hero-actions">
+				<a href="/book-pickup" class="btn btn-primary">Add Delivery Pass</a>
+				<a href="/pricing" class="btn btn-secondary">View Pricing</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="pass-summary">
+		<div class="container summary-grid">
+			<div class="price-card">
+				<h2>$7.99<span>/month</span></h2>
+				<p>Delivery Pass is a separate monthly add-on. It is not the same as a laundry subscription.</p>
+			</div>
+			<div class="rules-card">
+				<h2>What It Does</h2>
+				<ul>
+					<li>$0 base dispatch fee</li>
+					<li>$1.50 per round-trip mile introductory rate for first 3 months</li>
+					<li>$1.70 per round-trip mile after the intro period</li>
+					<li>Route priority where available</li>
+					<li>Optional driver tipping</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="details">
+		<div class="container">
+			<h2>Delivery Pass Does Not Mean Unlimited Free Delivery</h2>
+			<p>It only removes the base dispatch fee and gives member mileage pricing. Mileage, route availability, service timing, weather, demand, add-ons, specialty items, tips, missed pickup fees, and redelivery fees remain separate when applicable.</p>
+			<div class="table-responsive">
+				<table>
+					<thead>
+						<tr>
+							<th>Customer Type</th>
+							<th>Base Dispatch Fee</th>
+							<th>Mileage Rate</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>One-Time Customer</td>
+							<td>$3.80</td>
+							<td>$1.75 per round-trip mile</td>
+						</tr>
+						<tr>
+							<td>Subscriber Without Delivery Pass</td>
+							<td>$2.50</td>
+							<td>$1.70 per round-trip mile</td>
+						</tr>
+						<tr class="featured-row">
+							<td>Delivery Pass Member</td>
+							<td>$0.00</td>
+							<td>$1.50 intro / $1.70 standard per round-trip mile</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<section class="formula">
+		<div class="container">
+			<h2>How Delivery Is Calculated</h2>
+			<div class="formula-grid">
+				<div>
+					<h3>1. Round-trip miles</h3>
+					<p>Round-trip miles = one-way miles x 2.</p>
+				</div>
+				<div>
+					<h3>2. Mileage fee</h3>
+					<p>Mileage fee = round-trip miles x mileage rate.</p>
+				</div>
+				<div>
+					<h3>3. Delivery fee</h3>
+					<p>Delivery fee = base dispatch fee + mileage fee + route, weather, or demand adjustments.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="cta">
+		<div class="container">
+			<h2>Ready to lower frequent delivery costs?</h2>
+			<p>Add Delivery Pass with a pickup request, or compare laundry subscriptions first.</p>
+			<div class="hero-actions">
+				<a href="/book-pickup" class="btn btn-primary">Book Pickup</a>
+				<a href="/subscriptions" class="btn btn-secondary">Compare Subscriptions</a>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		background: linear-gradient(135deg, #f0f4f8 0%, #e8f2f8 100%);
+		padding: 70px 0;
+		text-align: center;
+	}
+
+	.eyebrow {
+		color: #00a0c6;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0;
+	}
+
+	.hero h1 {
+		color: #001f3f;
+		margin-bottom: 15px;
+	}
+
+	.hero p {
+		color: #555;
+		max-width: 720px;
+		margin: 0 auto 28px;
+		font-size: 1.1rem;
+		line-height: 1.7;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 15px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.pass-summary,
+	.details,
+	.formula {
+		padding: 60px 0;
+	}
+
+	.summary-grid {
+		display: grid;
+		grid-template-columns: minmax(240px, 1fr) minmax(280px, 2fr);
+		gap: 28px;
+	}
+
+	.price-card,
+	.rules-card {
+		background: white;
+		border: 1px solid #d8e8ef;
+		border-radius: 8px;
+		padding: 30px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	.price-card h2 {
+		color: #00a0c6;
+		font-size: 2.6rem;
+		margin-bottom: 10px;
+	}
+
+	.price-card span {
+		color: #666;
+		font-size: 1rem;
+	}
+
+	.rules-card h2,
+	.details h2,
+	.formula h2 {
+		color: #001f3f;
+		margin-bottom: 18px;
+	}
+
+	.rules-card ul {
+		margin-left: 20px;
+		color: #555;
+		line-height: 1.8;
+	}
+
+	.details {
+		background: #f9f9f9;
+	}
+
+	.details p {
+		color: #555;
+		max-width: 900px;
+		line-height: 1.8;
+		margin-bottom: 28px;
+	}
+
+	.table-responsive {
+		overflow-x: auto;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		background: white;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	}
+
+	th,
+	td {
+		padding: 15px;
+		text-align: left;
+		border-bottom: 1px solid #e0e0e0;
+	}
+
+	th {
+		background-color: #001f3f;
+		color: white;
+	}
+
+	.featured-row {
+		background: #f0f4f8;
+		font-weight: 700;
+	}
+
+	.formula-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 24px;
+	}
+
+	.formula-grid div {
+		background: white;
+		border: 1px solid #d8e8ef;
+		border-radius: 8px;
+		padding: 24px;
+	}
+
+	.formula-grid h3 {
+		color: #001f3f;
+		margin-bottom: 10px;
+	}
+
+	.formula-grid p {
+		color: #555;
+		line-height: 1.7;
+	}
+
+	.cta {
+		background: linear-gradient(135deg, #0066a1 0%, #00a0c6 100%);
+		color: white;
+		text-align: center;
+		padding: 70px 0;
+	}
+
+	.cta h2 {
+		color: white;
+		margin-bottom: 10px;
+	}
+
+	.cta p {
+		margin-bottom: 24px;
+		opacity: 0.95;
+	}
+
+	@media (max-width: 768px) {
+		.summary-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.hero-actions {
+			flex-direction: column;
+		}
+
+		th,
+		td {
+			padding: 10px;
+			font-size: 0.9rem;
+		}
+	}
+</style>

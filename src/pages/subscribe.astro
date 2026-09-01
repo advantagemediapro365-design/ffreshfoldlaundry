@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSubscriptionPlans } from '../lib/wix';
+
+const plans = await getSubscriptionPlans();
+const requestedPlan = Astro.url.searchParams.get('plan') ?? plans[0]?.slug ?? '';
+const status = Astro.url.searchParams.get('status');
+const message = Astro.url.searchParams.get('message');
+---
+
+<Layout title="Start a Laundry Subscription | Fresh Fold Delivery" description="Choose a Fresh Fold laundry subscription and see your monthly total before paying or contacting our team." canonicalPath="/subscribe">
+	<section class="subscription-checkout">
+		<div class="container">
+			<div class="checkout-card">
+				<h1>Choose your subscription</h1>
+				<p class="intro">Select a plan and see the monthly subscription total before you pay online or contact us.</p>
+				{status && message && <div class={`notice ${status === 'success' ? 'success' : 'error'}`}>{message}</div>}
+				<form method="POST" action="/api/subscribe" class="subscription-form">
+					<div class="form-group">
+						<label for="plan">Laundry plan</label>
+						<select id="plan" name="plan" required>
+							{plans.map((plan) => <option value={plan.slug} data-price={plan.price} selected={plan.slug === requestedPlan}>{plan.title} — {plan.price}</option>)}
+						</select>
+					</div>
+					<div class="form-group add-pass">
+						<label><input type="checkbox" name="deliveryPass" /> Add Fresh Fold Delivery Pass (+$7.99/month)</label>
+						<p>The pass removes the base dispatch fee; per-mile delivery charges still apply.</p>
+					</div>
+					<div class="customer-grid">
+						<div class="form-group"><label for="fullName">Full name</label><input id="fullName" name="fullName" required autocomplete="name" /></div>
+						<div class="form-group"><label for="email">Email address</label><input id="email" type="email" name="email" required autocomplete="email" /></div>
+						<div class="form-group"><label for="phone">Phone number</label><input id="phone" type="tel" name="phone" required autocomplete="tel" /></div>
+					</div>
+					<div class="total-box" aria-live="polite">
+						<div><span>Plan</span><strong data-plan-name></strong></div>
+						<div><span>Monthly plan price</span><strong data-plan-price></strong></div>
+						<div data-pass-row hidden><span>Delivery Pass</span><strong>$7.99/month</strong></div>
+						<div class="total"><span>Monthly total</span><strong data-monthly-total></strong></div>
+						<p>Delivery mileage, overages, specialty items, and tips are not included in this subscription total.</p>
+					</div>
+					<input type="hidden" name="monthlyTotal" />
+					<div class="payment-actions">
+						<button class="btn btn-primary" type="submit">Pay online — <span data-pay-total></span>/month</button>
+						<a class="btn btn-secondary whatsapp-link" target="_blank" rel="noopener">Message on WhatsApp</a>
+						<a class="btn btn-secondary email-link">Send an email</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>('.subscription-form');
+	const planSelect = form?.querySelector<HTMLSelectElement>('[name="plan"]');
+	const pass = form?.querySelector<HTMLInputElement>('[name="deliveryPass"]');
+	const money = (value: number) => `$${value.toFixed(2)}`;
+	function planPrice() {
+		const option = planSelect?.selectedOptions[0];
+		return Number((option?.dataset.price || '').replace(/[^0-9.]/g, '')) || 0;
+	}
+	function updateSubscriptionQuote() {
+		if (!form || !planSelect) return;
+		const base = planPrice();
+		const total = base + (pass?.checked ? 7.99 : 0);
+		const planName = planSelect.selectedOptions[0]?.textContent?.split(' — ')[0] || 'Selected plan';
+		document.querySelector<HTMLElement>('[data-plan-name]')!.textContent = planName;
+		document.querySelector<HTMLElement>('[data-plan-price]')!.textContent = `${money(base)}/month`;
+		document.querySelector<HTMLElement>('[data-monthly-total]')!.textContent = `${money(total)}/month`;
+		document.querySelector<HTMLElement>('[data-pay-total]')!.textContent = money(total);
+		document.querySelector<HTMLElement>('[data-pass-row]')!.hidden = !pass?.checked;
+		form.querySelector<HTMLInputElement>('[name="monthlyTotal"]')!.value = total.toFixed(2);
+		const name = String(new FormData(form).get('fullName') || 'a customer');
+		const message = `Hello Fresh Fold! I would like to start the ${planName}. My monthly total is ${money(total)}${pass?.checked ? ' including Delivery Pass' : ''}. Name: ${name}.`;
+		document.querySelector<HTMLAnchorElement>('.whatsapp-link')!.href = `https://wa.me/15704947523?text=${encodeURIComponent(message)}`;
+		document.querySelector<HTMLAnchorElement>('.email-link')!.href = `mailto:info@freshfoldaltoona.com?subject=${encodeURIComponent('Subscription request')}&body=${encodeURIComponent(message)}`;
+	}
+	form?.addEventListener('input', updateSubscriptionQuote);
+	form?.addEventListener('change', updateSubscriptionQuote);
+	updateSubscriptionQuote();
+</script>
+
+<style>
+	.subscription-checkout { padding: 60px 0; background: #f0f4f8; }
+	.checkout-card { max-width: 760px; margin: auto; background: white; border-radius: 10px; padding: 36px; box-shadow: 0 5px 18px rgba(0,0,0,.1); }
+	h1 { color: #001f3f; margin-bottom: 8px; }
+	.intro, .add-pass p, .total-box p { color: #666; }
+	.form-group { margin-top: 22px; }
+	.form-group > label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
+	select, input { box-sizing: border-box; width: 100%; padding: 12px; border: 1px solid #cfd8dc; border-radius: 6px; font: inherit; }
+	.add-pass { background: #f7fbfc; padding: 14px; border-radius: 6px; }
+	.add-pass label { display: flex; gap: 9px; align-items: center; }
+	.add-pass input { width: auto; }
+	.add-pass p { margin: 8px 0 0; font-size: .9rem; }
+	.customer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+	.total-box { margin-top: 28px; padding: 20px; background: #f7fbfc; border-radius: 7px; }
+	.total-box > div { display: flex; justify-content: space-between; padding: 8px 0; color: #555; }
+	.total-box .total { border-top: 2px solid #cfd8dc; margin-top: 8px; padding-top: 14px; color: #001f3f; font-size: 1.15rem; }
+	.total-box p { font-size: .85rem; margin: 12px 0 0; }
+	.payment-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
+	.payment-actions .btn { text-align: center; width: 100%; }
+	.payment-actions a { display: inline-flex; justify-content: center; align-items: center; }
+	.notice { margin-top: 16px; padding: 12px; border-radius: 6px; }.success { background: #e8f7ed; color: #17633a; }.error { background: #fdebea; color: #b42318; }
+	@media (max-width: 700px) { .checkout-card { padding: 24px; }.customer-grid, .payment-actions { grid-template-columns: 1fr; } }
+</style>
