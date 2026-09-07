@@ -192,7 +192,7 @@ const schema = {
 
 	/* Sections */
 	section {
-		padding: 42px 0;
+		padding: 32px 0;
 	}
 
 	/* Images */
@@ -226,6 +226,14 @@ const schema = {
 	.hero p, .section-subtitle, .subtitle { color: var(--muted); }
 	.card, .pricing-card, .plan-card, .pricing-cards > div, .delivery-item, .addon-item, .specialty-item, .feature, .flex-item, .benefit-item, .booking-wrapper, .form-section { border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 5px 18px rgba(15,39,66,.07); }
 	input, select, textarea { border: 1px solid var(--border); border-radius: 6px; background:#fff; color:var(--text); }
+	.container > :first-child { margin-top: 0; }
+	.container > :last-child { margin-bottom: 0; }
+	@media (max-width: 768px) {
+		section { padding: 26px 0; }
+		.container { padding-left: 16px; padding-right: 16px; }
+		h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
+		h2 { font-size: clamp(1.45rem, 6vw, 2rem); }
+	}
 
 	.whatsapp-float:hover,
 	.whatsapp-float:focus-visible {
