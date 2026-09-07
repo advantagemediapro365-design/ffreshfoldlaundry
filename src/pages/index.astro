@@ -1,6 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { SERVICE_AREA_GROUPS } from "../lib/zipAvailability.js";
+import {
+  getZipAvailability,
+  SERVICE_AREA_GROUPS,
+} from "../lib/zipAvailability.js";
 const services = [
   ["Residential", "Everyday laundry", "residential.png"],
   ["Student Laundry", "Dorm & apartment", "student_laundry.png"],
@@ -187,21 +190,12 @@ const services = [
   );
   const zipResult = zipForm?.querySelector<HTMLElement>(".zipbox-result");
 
-  zipForm?.addEventListener("submit", async (event) => {
+  zipForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     if (!zipInput || !zipResult) return;
     const zip = zipInput.value.trim();
-    const response = await fetch(
-      `/api/service-area?zip=${encodeURIComponent(zip)}`,
-    ).catch(() => null);
-    const availability = response?.ok ? await response.json() : null;
-    if (availability) {
-      zipResult.textContent = `${availability.label}: ${availability.summary}`;
-      return;
-    }
-    zipResult.textContent =
-      "Please check your ZIP code on our Service Areas page.";
-    window.location.href = `/service-areas#zipcode`;
+    const availability = getZipAvailability(zip);
+    zipResult.textContent = `${availability.label}: ${availability.summary}`;
   });
 </script>
 <style>
