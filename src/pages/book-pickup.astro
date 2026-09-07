@@ -16,6 +16,7 @@ const message = Astro.url.searchParams.get('message');
 		<div class="container">
 			<div class="hero-content">
 				<div class="hero-text">
+					<p class="booking-eyebrow">LOCAL. RELIABLE. PROFESSIONAL.</p>
 					<h1>Book Your Laundry Pickup</h1>
 					<p>Fresh, folded, and delivered—done right.</p>
 					<p>Complete your request and continue to secure Wix Payments checkout for one-time pickup service.</p>
@@ -26,9 +27,7 @@ const message = Astro.url.searchParams.get('message');
 					</ul>
 				</div>
 				<div class="hero-image">
-					<div class="placeholder-image">
-						<!-- Hero image would go here -->
-					</div>
+					<img src="/images/freshfold-home-hero.png" alt="Folded laundry ready for Fresh Fold pickup" />
 				</div>
 			</div>
 		</div>
@@ -94,6 +93,10 @@ const message = Astro.url.searchParams.get('message');
 							<div class="form-group">
 								<label>Phone Number</label>
 								<input type="tel" name="phone" placeholder="(XXX) XXX-XXXX" required />
+							</div>
+							<div class="form-group">
+								<label>Pickup Address</label>
+								<input type="text" name="pickupAddress" placeholder="Street address, apartment or unit" required />
 							</div>
 							<div class="form-group">
 								<label>Email Address</label>
@@ -310,8 +313,8 @@ const message = Astro.url.searchParams.get('message');
 			<div class="info-grid">
 				<div class="info-item">
 					<h3>📋 Proudly Serving Central PA</h3>
-					<p>Altoona - State College - Lock Haven</p>
-					<p style="font-size: 0.9rem; color: #999;">Daily service in Altoona & State College Weekly route to Lock Haven</p>
+					<p>Altoona • State College • Lock Haven • Centre &amp; Blair County routes</p>
+					<p style="font-size: 0.9rem; color: #999;">Active service in Altoona and State College; weekly Lock Haven route; route-based pickup in Bellefonte, Boalsburg, Lemont, Milesburg, Pine Grove Mills, Port Matilda, Pennsylvania Furnace, Warriors Mark, Tyrone, Duncansville, Hollidaysburg, Bellwood, Roaring Spring, Martinsburg, Claysburg, Newry, Gallitzin, Cresson, Williamsburg, Huntingdon, Castanea, McElhattan, and Mill Hall. Confirm your ZIP before booking.</p>
 				</div>
 				<div class="info-item">
 					<h3>🏠 Perfect For Everyone</h3>
@@ -445,8 +448,8 @@ const message = Astro.url.searchParams.get('message');
 
 <style>
 	.hero {
-		background: linear-gradient(135deg, #f0f4f8 0%, #e8f2f8 100%);
-		padding: 60px 0;
+		background: radial-gradient(circle at 62% 25%, #dff8f7 0, transparent 17%), linear-gradient(90deg, #fff 0%, #eaf6ff 100%);
+		padding: 42px 0 28px;
 	}
 
 	.hero-content {
@@ -457,12 +460,13 @@ const message = Astro.url.searchParams.get('message');
 	}
 
 	.hero-text h1 {
-		color: #001f3f;
+		color: var(--primary);
+		font-size: clamp(2.2rem, 4vw, 3.5rem);
 		margin-bottom: 10px;
 	}
 
 	.hero-text p {
-		color: #666;
+		color: var(--muted);
 		font-size: 1.05rem;
 		margin-bottom: 10px;
 	}
@@ -472,22 +476,25 @@ const message = Astro.url.searchParams.get('message');
 		margin-top: 20px;
 	}
 
+	.booking-eyebrow { display:inline-block; margin-bottom:12px !important; padding:3px 8px; border:1px solid var(--secondary); border-radius:99px; color:#009dc4 !important; font-size:.68rem !important; font-weight:800; letter-spacing:.06em; }
+
 	.hero-features li {
 		color: #666;
 		margin-bottom: 12px;
 		font-size: 0.95rem;
 	}
 
-	.placeholder-image {
+	.hero-image img {
 		width: 100%;
-		aspect-ratio: 1;
-		background: linear-gradient(135deg, #e8f2f8 0%, #d4e6f1 100%);
-		border-radius: 8px;
+		height: 230px;
+		object-fit: cover;
+		border-radius: 18px;
+		box-shadow: 0 12px 28px rgba(15,39,66,.12);
 	}
 
 	.booking-form-section {
 		padding: 60px 0;
-		background-color: #f9f9f9;
+		background-color: #f4fafc;
 	}
 
 	.notice {
@@ -510,23 +517,23 @@ const message = Astro.url.searchParams.get('message');
 	.booking-wrapper {
 		display: grid;
 		grid-template-columns: 2fr 1fr;
-		gap: 40px;
+		gap: 22px;
 	}
 
 	.form-steps {
 		background: white;
-		padding: 40px;
-		border-radius: 8px;
-		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+		padding: 24px;
+		border-radius: 12px;
+		box-shadow: 0 5px 15px rgba(15,39,66,0.08);
 	}
 
 	.steps-header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 40px;
-		padding-bottom: 20px;
-		border-bottom: 1px solid #e0e0e0;
+		margin-bottom: 22px;
+		padding: 12px 4px 18px;
+		border-bottom: 1px solid var(--border);
 		gap: 5px;
 		font-size: 0.75rem;
 	}
@@ -550,14 +557,22 @@ const message = Astro.url.searchParams.get('message');
 
 	.form-section {
 		display: none;
+		position: relative;
+		padding: 22px;
+		border: 1px solid #d9e9ee;
+		border-radius: 10px;
+		background: #fff;
 	}
 
 	.form-section.active {
 		display: block;
 	}
 
+	.form-section.active::before { content: 'Step ' counter(section); position:absolute; top:18px; right:20px; color:#009dc4; font-size:.72rem; font-weight:800; }
+	.booking-form { counter-reset:section; }.form-section { counter-increment:section; }
+
 	.form-section h2 {
-		color: #001f3f;
+		color: var(--primary);
 		margin-bottom: 15px;
 	}
 
@@ -622,8 +637,8 @@ const message = Astro.url.searchParams.get('message');
 	.form-group select {
 		width: 100%;
 		padding: 12px 15px;
-		border: 1px solid #e0e0e0;
-		border-radius: 6px;
+		border: 1px solid var(--border);
+		border-radius: 7px;
 		font-size: 1rem;
 	}
 
@@ -790,9 +805,11 @@ const message = Astro.url.searchParams.get('message');
 	.order-summary-sidebar {
 		background: white;
 		padding: 25px;
-		border-radius: 8px;
+		border-radius: 12px;
 		height: fit-content;
-		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+		box-shadow: 0 5px 15px rgba(15,39,66,.08);
+		position: sticky;
+		top: 110px;
 	}
 
 	.order-summary-sidebar h3 {
@@ -983,6 +1000,36 @@ const message = Astro.url.searchParams.get('message');
 
 		.order-summary-sidebar {
 			height: auto;
+			position: static;
 		}
+	}
+
+	/* Reference layout: compact workspace cards with a persistent quote rail. */
+	.booking-form-section { padding: 28px 0 64px; background: #f7fbfd; }
+	.booking-wrapper { align-items: start; gap: 18px; }
+	.steps-header { position: relative; justify-content: space-between; gap: 0; padding: 0 10px 18px; margin-bottom: 18px; border-bottom: 1px solid #d8e8ee; }
+	.steps-header::before { content: ''; position: absolute; top: 17px; left: 42px; right: 42px; height: 2px; background: #d8e8ee; z-index: 0; }
+	.steps-header .step-number, .steps-header span { position: relative; z-index: 1; }
+	.steps-header span { max-width: 100px; color: #6b7d8e; font-size: .65rem; text-align: center; line-height: 1.15; }
+	.steps-header .step-number { display: grid; width: 34px; height: 34px; place-items: center; border: 3px solid #fff; border-radius: 50%; background: #e4edf1; color: #6b7d8e; font-weight: 800; box-shadow: 0 0 0 1px #cbdde4; }
+	.steps-header .step-number.active { background: var(--secondary); color: #fff; box-shadow: 0 0 0 1px var(--secondary); }
+	.form-section { padding: 24px 28px; border: 1px solid #d9e8ee; border-radius: 12px; background: #fff; box-shadow: 0 4px 14px rgba(15,39,66,.05); }
+	.form-section h2 { display: flex; align-items: center; gap: 10px; font-size: 1.12rem; }
+	.form-section h2::before { content: counter(section); display: grid; width: 28px; height: 28px; place-items: center; border-radius: 50%; background: var(--primary); color: #fff; font-size: .8rem; }
+	.radio-option, .pickup-option, .checkbox-option, .weight-option { border-color: #d8e8ee; border-radius: 8px; background: #fbfeff; }
+	.radio-option:has(input:checked), .pickup-option:has(input:checked), .weight-option:has(input:checked) { border-color: var(--secondary); box-shadow: 0 0 0 2px rgba(7,159,196,.12); }
+	.order-summary-sidebar { top: 18px; border: 1px solid #d9e8ee; border-radius: 12px; box-shadow: 0 5px 18px rgba(15,39,66,.08); }
+	.order-summary-sidebar h3 { color: var(--primary); border-bottom-color: #d9e8ee; }
+	.summary-row.total, .summary-item.total { border-top-color: #d9e8ee; color: var(--primary); }
+	.total-price, [data-summary="total"] { color: var(--secondary); }
+	.security-badge { background: #eaf8fb; border: 1px solid #cbeaf0; border-radius: 9px; }
+	.info-section { padding-top: 16px; }
+	.info-grid { gap: 16px; }
+	.info-item { border: 1px solid #d9e8ee; border-radius: 10px; background: #fff; }
+	@media (max-width: 768px) {
+		.steps-header { overflow-x: auto; justify-content: flex-start; gap: 14px; padding-inline: 2px; }
+		.steps-header::before { left: 18px; right: 18px; }
+		.steps-header span { min-width: 78px; }
+		.form-section { padding: 20px 18px; }
 	}
 </style>

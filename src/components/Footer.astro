@@ -3,6 +3,11 @@
 
 <footer>
 	<div class="container">
+		<div class="footer-brand-row">
+			<a class="footer-brand" href="/" aria-label="Fresh Fold Altoona home"><img src="/images/freshfold-logo.jpg" alt="Fresh Fold Altoona" /><span><strong>Fresh Fold</strong><small>ALTOONA<br />PICKUP &amp; DELIVERY</small></span></a>
+			<p>We Pick Up. We Wash. We Care. We Deliver.</p>
+			<div class="footer-social"><a href="https://www.facebook.com" aria-label="Fresh Fold on Facebook">f</a><a href="https://www.instagram.com" aria-label="Fresh Fold on Instagram">◎</a><a href="https://www.tiktok.com" aria-label="Fresh Fold on TikTok">♪</a></div>
+		</div>
 		<div class="footer-grid">
 			<div class="footer-section">
 				<h4>Fresh Fold Laundry Delivery Altoona</h4>
@@ -46,6 +51,7 @@
 					<li><a href="/service-areas/duncansville-pa">Duncansville</a></li>
 					<li><a href="/service-areas/tyrone-pa">Tyrone</a></li>
 					<li><a href="/service-areas/bellwood-pa">Bellwood</a></li>
+					<li><a href="/service-areas#zipcode">All towns &amp; ZIP codes</a></li>
 				</ul>
 			</div>
 			<div class="footer-section">
@@ -87,11 +93,13 @@
 
 <style>
 	footer {
-		background-color: #001f3f;
+		background-color: var(--primary);
 		color: white;
 		padding: 60px 0 20px;
 		margin-top: 80px;
 	}
+
+	.footer-brand-row { display:flex; align-items:center; gap:18px; padding-bottom:28px; margin-bottom:30px; border-bottom:1px solid rgba(255,255,255,.2); color:#fff; }.footer-brand { display:flex; align-items:center; gap:9px; color:#fff; text-decoration:none; }.footer-brand img { width:54px; height:54px; border-radius:50%; object-fit:contain; }.footer-brand strong { display:block; font-family:'Outfit',sans-serif; font-size:1.35rem; line-height:1; }.footer-brand small { display:block; margin-top:3px; color:#58d4eb; font-size:.5rem; font-weight:800; letter-spacing:.1em; line-height:1.2; }.footer-brand-row>p { margin:0; font-size:.82rem; color:#d9f7fb; }.footer-social { display:flex; gap:8px; margin-left:auto; }.footer-social a { display:grid; width:30px; height:30px; place-items:center; border-radius:50%; background:#168bc0; color:#fff; text-decoration:none; font-weight:800; }
 
 	.footer-grid {
 		display: grid;
@@ -179,6 +187,7 @@
 	}
 
 	@media (max-width: 768px) {
+		.footer-brand-row { align-items:flex-start; flex-wrap:wrap; }.footer-brand-row>p { width:100%; }.footer-social { margin-left:0; }
 		.footer-grid {
 			grid-template-columns: 1fr;
 			gap: 30px;

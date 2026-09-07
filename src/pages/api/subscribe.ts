@@ -2,9 +2,9 @@ import type { APIRoute } from 'astro';
 import { buildCheckoutUrl } from '../../lib/wix';
 
 const planPrices: Record<string, number> = {
-  'student-plan': 109,
-  'weekly-household-plan': 149,
-  'family-plan': 229,
+	'student-plan': 79,
+	'weekly-household-plan': 129,
+	'family-plan': 199,
   'route-plus-plan': 299,
 };
 

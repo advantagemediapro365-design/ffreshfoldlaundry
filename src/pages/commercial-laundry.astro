@@ -35,6 +35,7 @@ import Layout from '../layouts/Layout.astro';
 			<div class="info-box">
 				<p>📍 <strong>Serving Altoona and Surrounding Areas</strong></p>
 				<p>Daily in Altoona & State College • Weekly route to Lock Haven</p>
+				<p>Active service in Altoona &amp; State College • weekly Lock Haven route • route-based service across Centre County, Blair County, and nearby Central PA towns. <a href="/service-areas#zipcode">Check your ZIP</a>.</p>
 			</div>
 		</div>
 	</section>
@@ -740,4 +741,38 @@ import Layout from '../layouts/Layout.astro';
 			font-size: 1.8rem;
 		}
 	}
+
+	/* Sales-page treatment from the supplied commercial reference. */
+	.hero { padding:34px 0 26px; background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.86) 54%,rgba(234,247,251,.5)),url('/images/freshfold-commercial-hero.png') right center/52% auto no-repeat; }
+	.hero-content { grid-template-columns:1.08fr .92fr; gap:28px; }
+	.hero-text h1 { font-size:clamp(2.4rem,5vw,4rem); }
+	.hero-image .placeholder-image { aspect-ratio:1.15; border-radius:14px; overflow:hidden; box-shadow:0 8px 24px rgba(15,39,66,.12); }
+	.hero-image .placeholder-image img { object-fit:cover; }
+	.service-info { padding:14px 0; background:#fff; }
+	.info-box { border:1px solid var(--border); border-left:4px solid var(--secondary); background:#f1fbfd; border-radius:8px; }
+	.we-serve { padding:34px 0; }
+	.service-types { grid-template-columns:repeat(4,1fr); gap:12px; }
+	.type-card { padding:18px 14px; border-color:var(--border); border-radius:10px; box-shadow:0 4px 13px rgba(15,39,66,.05); }
+	.type-card .icon { color:var(--secondary); font-size:2rem; }
+	.features { padding:34px 0; background:#f7fbfd; }
+	.features-grid { grid-template-columns:repeat(3,1fr); gap:14px; }
+	.feature { padding:18px; border:1px solid var(--border); border-radius:9px; background:#fff; }
+	.feature-icon { color:var(--secondary); font-size:2rem; }
+	.pricing { padding:38px 0; }
+	.pricing-grid { grid-template-columns:repeat(4,1fr); gap:14px; }
+	.pricing-card { padding:23px 16px; border-color:var(--border); border-radius:10px; box-shadow:0 4px 14px rgba(15,39,66,.06); }
+	.pricing-card.featured { border-color:var(--secondary); background:#effafd; }
+	.process { padding:34px 0; background:#f1fbfd; }
+	.process-steps { grid-template-columns:repeat(9,1fr); gap:8px; }
+	.process-step:nth-of-type(odd) { grid-column:span 1; }.process-steps .arrow { grid-column:span 1; }
+	.testimonials { padding:38px 0; }
+	.testimonial { border:1px solid var(--border); border-left:0; border-radius:10px; box-shadow:0 4px 13px rgba(15,39,66,.05); }
+	.quote-section { padding:38px 0; background:#f7fbfd; }
+	.quote-box { grid-template-columns:.82fr 1.18fr; padding:28px; border:1px solid var(--border); border-radius:12px; box-shadow:0 8px 22px rgba(15,39,66,.08); }
+	.quote-text { padding:10px 20px 10px 0; }
+	.quote-form { display:grid; grid-template-columns:1fr 1fr; gap:11px; }
+	.quote-form .form-group:nth-last-of-type(1), .quote-form button { grid-column:1/-1; }
+	.final-cta { padding:42px 0; background:linear-gradient(90deg,var(--primary),#087ea9); }
+	@media (max-width: 900px) { .service-types, .pricing-grid { grid-template-columns:repeat(2,1fr); }.features-grid { grid-template-columns:repeat(2,1fr); }.process-steps { grid-template-columns:repeat(5,1fr); } }
+	@media (max-width: 600px) { .hero { background:linear-gradient(90deg,#fff,rgba(255,255,255,.84)),url('/images/freshfold-commercial-hero.png') center/cover; }.hero-content { grid-template-columns:1fr; }.service-types, .pricing-grid, .features-grid, .quote-form { grid-template-columns:1fr; }.process-steps { grid-template-columns:1fr; }.process-steps .arrow { display:none; }.quote-box { grid-template-columns:1fr; }.quote-text { padding:0; } }
 </style>

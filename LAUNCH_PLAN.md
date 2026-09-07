@@ -1,5 +1,7 @@
 # Fresh Fold Launch Plan
 
+> Use [DEVELOPMENT_PROCESS.md](DEVELOPMENT_PROCESS.md) for the phased implementation order and release gates. This document remains the detailed launch checklist for booking, subscriptions, service areas, QA, and deployment.
+
 ## Goal
 Make subscriptions and pickup booking work reliably so customers can start service and the site can go live.
 

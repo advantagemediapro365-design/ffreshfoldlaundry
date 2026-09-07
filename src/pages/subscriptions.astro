@@ -7,15 +7,15 @@ const plans = await getSubscriptionPlans();
 
 <Layout
 	title="Laundry Subscription Plans | Fresh Fold Delivery"
-	description="Fresh Fold Delivery offers laundry subscription plans in Central PA for students, households, and families, with optional Delivery Pass benefits where available."
+	description="Fresh Fold Altoona offers Fresh Starter, Fresh Weekly, Fresh Family, and Fresh Route Plus laundry subscriptions for Central PA routes."
 	canonicalPath="/subscriptions"
 >
 	<!-- Hero Section -->
 	<section class="hero">
 		<div class="container">
 			<h1>Laundry Subscriptions That Save Time Every Week</h1>
-			<p>Fresh Fold subscriptions cover laundry processing only, with delivery calculated separately unless Delivery Pass or an approved promotion applies.</p>
-			<p>Select a plan to see your monthly total, then pay online or contact us by WhatsApp or email.</p>
+			<p>Choose a recurring laundry plan with included monthly pounds, predictable pickups, and discounted overage rates.</p>
+			<p>Subscribers receive $0 base dispatch and $1.25 per round-trip mile delivery pricing. Driver tips remain optional.</p>
 			<div class="hero-buttons">
 				<a href="#plans" class="btn btn-primary">Compare Plans</a>
 				<a href="/pricing" class="btn btn-secondary">View Pricing Details</a>
@@ -62,17 +62,16 @@ const plans = await getSubscriptionPlans();
 			<h2>Choose Your Plan</h2>
 			<div class="plans-grid">
 				<div class="plan-card" id="student-plan">
-					<h3>Student Plan</h3>
-					<p class="plan-price">$109<span>/month</span></p>
+					<h3>Fresh Starter</h3>
+					<p class="plan-price">$79<span>/month</span></p>
 					<div class="plan-details">
-						<p><strong>Includes 60 lb/month</strong></p>
-						<p>Suggested use: 15 lb/week</p>
-						<p>First month: $92.65 with 15% laundry discount</p>
+						<p><strong>Includes 40 lb/month</strong></p>
+						<p>2 pickups/month</p>
 					</div>
 					<ul class="plan-features">
-						<li>Best for students, light weekly laundry, and parent-paid student plans.</li>
-						<li>Overage: $1.89/lb</li>
-						<li>Delivery is calculated separately.</li>
+						<li>Great for individuals and light loads.</li>
+						<li>Overage: $1.75/lb</li>
+						<li>$0 base dispatch + $1.25/round-trip mile delivery.</li>
 					</ul>
 					<div class="plan-actions">
 						<a href={`/subscribe?plan=${encodeURIComponent(plans[0].slug)}`} class="btn btn-primary">Choose & pay</a>
@@ -81,17 +80,16 @@ const plans = await getSubscriptionPlans();
 				</div>
 
 				<div class="plan-card" id="weekly-household-plan">
-					<h3>Weekly Household Plan</h3>
-					<p class="plan-price">$149<span>/month</span></p>
+					<h3>Fresh Weekly</h3>
+					<p class="plan-price">$129<span>/month</span></p>
 					<div class="plan-details">
-						<p><strong>Includes 85 lb/month</strong></p>
-						<p>Recurring pickup schedule</p>
-						<p>First month: $126.65 with 15% laundry discount</p>
+						<p><strong>Includes 75 lb/month</strong></p>
+						<p>Weekly pickup</p>
 					</div>
 					<ul class="plan-features">
-						<li>Best for regular weekly laundry users who want predictable pricing.</li>
-						<li>Overage: $1.75/lb</li>
-						<li>Delivery is calculated separately.</li>
+						<li>Ideal for busy professionals and couples.</li>
+						<li>Overage: $1.65/lb</li>
+						<li>$0 base dispatch + $1.25/round-trip mile delivery.</li>
 					</ul>
 					<div class="plan-actions">
 						<a href={`/subscribe?plan=${encodeURIComponent(plans[1].slug)}`} class="btn btn-primary">Choose & pay</a>
@@ -100,17 +98,16 @@ const plans = await getSubscriptionPlans();
 				</div>
 
 				<div class="plan-card" id="family-plan">
-					<h3>Family Plan</h3>
-					<p class="plan-price">$229<span>/month</span></p>
+					<h3>Fresh Family</h3>
+					<p class="plan-price">$199<span>/month</span></p>
 					<div class="plan-details">
-						<p><strong>Includes 150 lb/month</strong></p>
-						<p>Recurring pickup schedule</p>
-						<p>First month: $194.65 with 15% laundry discount</p>
+						<p><strong>Includes 125 lb/month</strong></p>
+						<p>Weekly or twice-weekly pickup</p>
 					</div>
 					<ul class="plan-features">
-						<li>Best for families and larger households.</li>
-						<li>Overage: $1.65/lb</li>
-						<li>Delivery is calculated separately.</li>
+						<li>For families with bigger laundry needs.</li>
+						<li>Overage: $1.55/lb</li>
+						<li>$0 base dispatch + $1.25/round-trip mile delivery.</li>
 					</ul>
 					<div class="plan-actions">
 						<a href={`/subscribe?plan=${encodeURIComponent(plans[2].slug)}`} class="btn btn-primary">Choose & pay</a>
@@ -120,17 +117,16 @@ const plans = await getSubscriptionPlans();
 
 				<div class="plan-card featured" id="route-plus-plan">
 					<div class="badge">Best Value</div>
-					<h3>Route Plus Plan</h3>
+					<h3>Fresh Route Plus</h3>
 					<p class="plan-price">$299<span>/month</span></p>
 					<div class="plan-details">
 						<p><strong>Includes 200 lb/month</strong></p>
-						<p>For high-volume recurring users</p>
-						<p>First month: $254.15 with 15% laundry discount</p>
+						<p>Up to 2 pickups/week</p>
 					</div>
 					<ul class="plan-features">
-						<li>Best for heavy users, shared homes, rentals, and recurring high-volume customers.</li>
+						<li>For high-volume homes, shared houses, and recurring heavy users.</li>
 						<li>Overage: $1.50/lb</li>
-						<li>Delivery is calculated separately.</li>
+						<li>$0 base dispatch + $1.25/round-trip mile delivery.</li>
 					</ul>
 					<div class="plan-actions">
 						<a href={`/subscribe?plan=${encodeURIComponent(plans[3].slug)}`} class="btn btn-primary">Choose & pay</a>
@@ -139,7 +135,7 @@ const plans = await getSubscriptionPlans();
 				</div>
 			</div>
 			<div class="disclaimer">
-				<p>Fresh Fold subscriptions cover laundry processing only. Delivery, mileage, add-ons, specialty items, driver tips, missed pickup fees, and redelivery fees are separate unless specifically included in an approved promotion or written commercial agreement.</p>
+				<p>Subscription prices cover laundry processing. Delivery uses the subscriber rate of $0 base dispatch plus $1.25 per round-trip mile. Add-ons, specialty items, driver tips, missed pickup fees, and redelivery fees remain separate unless an approved agreement says otherwise.</p>
 			</div>
 		</div>
 	</section>
@@ -163,39 +159,39 @@ const plans = await getSubscriptionPlans();
 					</thead>
 					<tbody>
 						<tr>
-							<td><strong>Student Plan</strong></td>
-							<td>$109</td>
-							<td>60 lb/month</td>
-							<td>$1.82/lb</td>
-							<td>$1.89/lb</td>
-							<td>Separate</td>
-							<td>Students and light weekly users</td>
+							<td><strong>Fresh Starter</strong></td>
+							<td>$79</td>
+							<td>40 lb/month</td>
+							<td>$1.98/lb</td>
+							<td>$1.75/lb</td>
+							<td>$0 base + $1.25/RT mile</td>
+							<td>Individuals and light loads</td>
 						</tr>
 						<tr>
-							<td><strong>Weekly Household Plan</strong></td>
-							<td>$149</td>
-							<td>85 lb/month</td>
-							<td>$1.75/lb</td>
-							<td>$1.75/lb</td>
-							<td>Separate</td>
-							<td>Couples, small households</td>
-						</tr>
-						<tr>
-							<td><strong>Family Plan</strong></td>
-							<td>$229</td>
-							<td>150 lb/month</td>
-							<td>$1.53/lb</td>
+							<td><strong>Fresh Weekly</strong></td>
+							<td>$129</td>
+							<td>75 lb/month</td>
+							<td>$1.72/lb</td>
 							<td>$1.65/lb</td>
-							<td>Separate</td>
-							<td>Families, larger laundry needs</td>
+							<td>$0 base + $1.25/RT mile</td>
+							<td>Busy professionals and couples</td>
+						</tr>
+						<tr>
+							<td><strong>Fresh Family</strong></td>
+							<td>$199</td>
+							<td>125 lb/month</td>
+							<td>$1.59/lb</td>
+							<td>$1.55/lb</td>
+							<td>$0 base + $1.25/RT mile</td>
+							<td>Families with bigger needs</td>
 						</tr>
 						<tr class="featured-row">
-							<td><strong>Route Plus Plan</strong></td>
+							<td><strong>Fresh Route Plus</strong></td>
 							<td>$299</td>
 							<td>200 lb/month</td>
 							<td>$1.50/lb</td>
 							<td>$1.50/lb</td>
-							<td>Separate</td>
+							<td>$0 base + $1.25/RT mile</td>
 							<td>High-volume homes and shared houses</td>
 						</tr>
 					</tbody>
@@ -217,12 +213,12 @@ const plans = await getSubscriptionPlans();
 				<div class="feature">
 					<div class="feature-icon">💰</div>
 					<h3>First-Month Savings</h3>
-					<p>15% off the first month applies to laundry processing only.</p>
+					<p>Included monthly pounds and discounted overage rates help keep recurring laundry predictable.</p>
 				</div>
 				<div class="feature">
 					<div class="feature-icon">🚀</div>
-					<h3>Delivery Pass Optional</h3>
-					<p>Add Delivery Pass separately to remove the base dispatch fee and use member mileage rates.</p>
+					<h3>Subscriber Delivery Pricing</h3>
+					<p>Subscribers receive $0 base dispatch and $1.25 per round-trip mile delivery pricing.</p>
 				</div>
 				<div class="feature">
 					<div class="feature-icon">🎯</div>
@@ -262,27 +258,27 @@ const plans = await getSubscriptionPlans();
 		</div>
 	</section>
 
-	<!-- Delivery Pass -->
+	<!-- Subscriber delivery details -->
 	<section class="student-plans">
 		<div class="container">
-			<h2>Need Delivery Savings Too?</h2>
+			<h2>Subscriber Delivery Details</h2>
 			<div class="student-grid">
 				<div class="student-card">
-					<h3>Fresh Fold Delivery Pass</h3>
-					<p class="student-price">$7.99<span>/month</span></p>
+					<h3>Member Delivery Rate</h3>
+					<p class="student-price">$0<span> base dispatch</span></p>
 					<p>$0 base dispatch fee</p>
-					<p>$1.50/round-trip mile intro rate for first 3 months</p>
-					<a href="/delivery-pass" class="btn btn-primary">View Delivery Pass</a>
-				</div>
-				<div class="student-card">
-					<h3>Discount Reminder</h3>
-					<p class="student-price">15%<span> first month</span></p>
-					<p>Applies to laundry processing only</p>
-					<p>Delivery, add-ons, tips, specialty items, and Delivery Pass are not discounted.</p>
+					<p>$1.25 per round-trip mile</p>
 					<a href="/pricing" class="btn btn-primary">View Pricing</a>
 				</div>
+				<div class="student-card">
+					<h3>Plan Flexibility</h3>
+					<p class="student-price">Skip<span> or pause</span></p>
+					<p>Keep your plan aligned with your laundry needs.</p>
+					<p>Add-ons, specialty items, driver tips, missed pickup fees, and redelivery fees are separate.</p>
+					<a href="/contact" class="btn btn-primary">Ask a Question</a>
+				</div>
 			</div>
-			<p class="student-note">After the first month, subscriptions renew at the regular monthly price.</p>
+			<p class="student-note">Actual delivery availability and route timing are confirmed with your address.</p>
 		</div>
 	</section>
 
@@ -300,8 +296,8 @@ const plans = await getSubscriptionPlans();
 					<p>Yes! You can cancel, skip, or pause any time without penalties or extra charges.</p>
 				</div>
 				<div class="faq-item">
-					<h4>Does Delivery Pass mean free delivery?</h4>
-					<p>Delivery Pass does not mean unlimited free delivery. It removes the base dispatch fee and applies member mileage pricing.</p>
+					<h4>Is delivery included in my subscription?</h4>
+					<p>Subscribers receive $0 base dispatch and $1.25 per round-trip mile delivery pricing. Driver tips remain optional.</p>
 				</div>
 			</div>
 			<div class="view-all-faq">
@@ -318,7 +314,7 @@ const plans = await getSubscriptionPlans();
 			<div class="cta-buttons">
 				<a href="#plans" class="btn btn-primary">Start a Subscription</a>
 				<a href="/book-pickup" class="btn btn-secondary">Book One-Time Pickup</a>
-				<a href="/delivery-pass" class="btn btn-secondary">View Delivery Pass</a>
+				<a href="/pricing" class="btn btn-secondary">View Pricing Details</a>
 			</div>
 		</div>
 	</section>

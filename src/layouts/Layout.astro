@@ -16,7 +16,7 @@ const {
 	noindex = false,
 } = Astro.props;
 
-const siteUrl = 'https://freshfolddelivery.com';
+const siteUrl = 'https://freshfoldaltoona.com';
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const schema = {
 	'@context': 'https://schema.org',
@@ -53,7 +53,7 @@ const schema = {
 		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
 		<style>
 			/* Skip Link for Accessibility */
 			.skip-link {
@@ -103,13 +103,13 @@ const schema = {
 	body {
 		width: 100%;
 		height: 100%;
-		font-family: 'Inter', sans-serif;
-		color: #333;
+		font-family: 'DM Sans', sans-serif;
+		color: #17324f;
 		line-height: 1.6;
 	}
 
 	body {
-		background-color: #ffffff;
+		background-color: #f5fbfd;
 	}
 
 	main {
@@ -118,16 +118,19 @@ const schema = {
 
 	/* Colors */
 	:root {
-		--primary: #0066a1;
-		--secondary: #00a0c6;
-		--dark: #001f3f;
-		--light: #f0f4f8;
-		--text: #333;
-		--border: #e0e0e0;
+		--primary: #0f2742;
+		--secondary: #079fc4;
+		--dark: #0f2742;
+		--light: #eaf7fb;
+		--aqua: #dff8f7;
+		--text: #24364b;
+		--muted: #5b6775;
+		--border: #cfe4ec;
 	}
 
 	/* Typography */
 	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Outfit', sans-serif;
 		font-weight: 700;
 		line-height: 1.2;
 	}
@@ -146,9 +149,13 @@ const schema = {
 
 	/* Buttons */
 	button, .btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
 		padding: 12px 24px;
 		border: none;
-		border-radius: 6px;
+		border-radius: 7px;
 		font-weight: 600;
 		cursor: pointer;
 		transition: all 0.3s ease;
@@ -162,6 +169,7 @@ const schema = {
 
 	.btn-primary:hover {
 		background-color: var(--primary);
+		transform: translateY(-1px);
 	}
 
 	.btn-secondary {
@@ -184,7 +192,7 @@ const schema = {
 
 	/* Sections */
 	section {
-		padding: 60px 0;
+		padding: 42px 0;
 	}
 
 	/* Images */
@@ -205,13 +213,19 @@ const schema = {
 		color: #ffffff;
 		text-decoration: none;
 		padding: 12px 16px;
-		border-radius: 999px;
+		border-radius: 8px;
 		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 		font-weight: 700;
 		transition: transform 0.2s ease, box-shadow 0.2s ease;
 	}
 
-	.call-float { position: fixed; bottom: 24px; left: 24px; z-index: 1000; display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: #ffffff; text-decoration: none; padding: 12px 16px; border-radius: 999px; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18); font-weight: 700; }
+	.call-float { position: fixed; bottom: 24px; left: 24px; z-index: 1000; display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: #ffffff; text-decoration: none; padding: 12px 16px; border-radius: 8px; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18); font-weight: 700; }
+
+	.hero, .pricing-services, .delivery-pricing, .add-ons, .specialty-items, .plans, .comparison, .features, .flexibility, .booking-form-section { background: transparent; }
+	.hero h1, section h1, section h2, section h3 { color: var(--primary); }
+	.hero p, .section-subtitle, .subtitle { color: var(--muted); }
+	.card, .pricing-card, .plan-card, .pricing-cards > div, .delivery-item, .addon-item, .specialty-item, .feature, .flex-item, .benefit-item, .booking-wrapper, .form-section { border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 5px 18px rgba(15,39,66,.07); }
+	input, select, textarea { border: 1px solid var(--border); border-radius: 6px; background:#fff; color:var(--text); }
 
 	.whatsapp-float:hover,
 	.whatsapp-float:focus-visible {
