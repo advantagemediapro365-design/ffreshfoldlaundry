@@ -21,8 +21,8 @@ export function getZipAvailability(rawZip) {
   }
 
   if (PO_BOX.has(zip)) return { status: 'waitlist', label: 'Physical address needed', summary: 'This is a P.O. Box ZIP and cannot be used as a pickup address. Please enter the physical pickup-address ZIP instead.' };
-  if (ACTIVE[zip]) return { status: 'active', label: `${ACTIVE[zip]} — active service`, summary: `${ACTIVE[zip]} is an active service area. Continue to booking and we’ll confirm your pickup window.` };
-  if (zip === '17745') return { status: 'weekly', label: 'Lock Haven — weekly route', summary: 'Lock Haven is served by weekly route. Continue to booking and we’ll confirm the next route availability.' };
-  if (ROUTE_BASED[zip]) return { status: 'route', label: `${ROUTE_BASED[zip]} — route-based`, summary: 'This area is route-based. Send your request and we’ll confirm the next available pickup route.' };
+  if (ACTIVE[zip]) return { status: 'active', label: `${ACTIVE[zip]} — active service`, summary: `${ACTIVE[zip]} is in our coverage area. Call us now at 570-494-7523 to schedule your pickup.` };
+  if (zip === '17745') return { status: 'weekly', label: 'Lock Haven — weekly route', summary: 'Lock Haven is in our coverage area. Call us now at 570-494-7523 to confirm the next available route.' };
+  if (ROUTE_BASED[zip]) return { status: 'route', label: `${ROUTE_BASED[zip]} — route-based`, summary: 'You are in our coverage area. Call us now at 570-494-7523 to confirm the next available pickup route.' };
   return { status: 'waitlist', label: 'Not on our route yet?', summary: 'We’re growing coverage. Share your contact details through booking or contact us to join the waitlist.' };
 }

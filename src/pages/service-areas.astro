@@ -130,21 +130,26 @@ const availabilityMessage = 'Enter your ZIP code to check whether we offer daily
 	</section>
 
 	<script type="module">
-		import { getZipAvailability } from '../lib/zipAvailability.js';
+		const form = document.querySelector('#zip-check-form');
+		const input = form?.querySelector('input[name="zipcode"]');
+		const result = document.querySelector('#zip-result');
 
-		const form = document.getElementById('zip-check-form');
-		const input = document.getElementById('zipcode');
-		const result = document.getElementById('zip-result');
-
-		if (form && input && result) {
-			form.addEventListener('submit', (event) => {
+		if (form instanceof HTMLFormElement && input instanceof HTMLInputElement && result) {
+			form.addEventListener('submit', async (event) => {
 				event.preventDefault();
-				const zip = input.value.trim();
-				const availability = getZipAvailability(zip);
-				result.innerHTML = `
-					<p class="zip-result-title">${availability.label}</p>
-					<p class="zip-result-summary">${availability.summary}</p>
-				`;
+				const zip = String(input.value || '').trim();
+				result.innerHTML = '<p class="zip-result-summary">Checking your ZIP code...</p>';
+				try {
+					const response = await fetch(`/api/service-area?zip=${encodeURIComponent(zip)}`);
+					if (!response.ok) throw new Error('ZIP check failed');
+					const availability = await response.json();
+					result.innerHTML = `
+						<p class="zip-result-title">${availability.label}</p>
+						<p class="zip-result-summary">${availability.summary}</p>
+					`;
+				} catch {
+					result.innerHTML = '<p class="zip-result-summary">We could not check your ZIP code right now. Please call 570-494-7523.</p>';
+				}
 			});
 		}
 	</script>

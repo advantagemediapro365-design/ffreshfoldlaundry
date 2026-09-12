@@ -1,0 +1,40 @@
+---
+---
+
+<aside id="cookie-consent" class="cookie-consent" hidden aria-label="Cookie settings" role="dialog" aria-live="polite">
+	<div>
+		<strong>Privacy and cookies</strong>
+		<p>We use only cookies needed for site operation unless you choose otherwise. Read our <a href="/cookie-policy">Cookie Policy</a> and <a href="/privacy-policy">Privacy Policy</a>.</p>
+	</div>
+	<div class="cookie-actions">
+		<button type="button" id="cookie-reject" class="cookie-button secondary">Reject optional cookies</button>
+		<button type="button" id="cookie-accept" class="cookie-button primary">Accept optional cookies</button>
+	</div>
+</aside>
+
+<script>
+	const banner = document.querySelector<HTMLElement>('#cookie-consent');
+	const accept = document.querySelector<HTMLButtonElement>('#cookie-accept');
+	const reject = document.querySelector<HTMLButtonElement>('#cookie-reject');
+	const storageKey = 'freshfold-cookie-consent';
+
+	if (banner && !localStorage.getItem(storageKey)) banner.hidden = false;
+	const saveConsent = (value: 'accepted' | 'rejected') => {
+		localStorage.setItem(storageKey, value);
+		if (banner) banner.hidden = true;
+	};
+	accept?.addEventListener('click', () => saveConsent('accepted'));
+	reject?.addEventListener('click', () => saveConsent('rejected'));
+</script>
+
+<style>
+	.cookie-consent { position:fixed; right:1rem; bottom:1rem; z-index:1500; display:flex; max-width:720px; gap:1rem; align-items:center; padding:1rem 1.25rem; background:#fff; color:#17324f; border:2px solid #0f2742; border-radius:10px; box-shadow:0 8px 28px rgba(15,39,66,.22); }
+	.cookie-consent p { margin:.25rem 0 0; font-size:.9rem; }
+	.cookie-consent a { color:#00658d; font-weight:700; }
+	.cookie-actions { display:flex; flex-wrap:wrap; gap:.5rem; }
+	.cookie-button { min-height:44px; padding:.65rem .85rem; border:2px solid #0f2742; border-radius:6px; cursor:pointer; font:inherit; font-weight:700; white-space:nowrap; }
+	.cookie-button.primary { background:#0f2742; color:#fff; }
+	.cookie-button.secondary { background:#fff; color:#0f2742; }
+	.cookie-button:focus-visible { outline:3px solid #079fc4; outline-offset:3px; }
+	@media (max-width:700px) { .cookie-consent { right:.5rem; bottom:.5rem; left:.5rem; display:block; } .cookie-actions { margin-top:.75rem; } .cookie-button { flex:1; white-space:normal; } }
+</style>

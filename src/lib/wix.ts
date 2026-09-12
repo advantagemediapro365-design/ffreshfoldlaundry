@@ -21,6 +21,11 @@ export type PickupQuote = {
   total: number;
 };
 
+export type BookingValidation = {
+  ok: boolean;
+  message?: string;
+};
+
 const asPositiveNumber = (value: unknown, fallback = 0) => {
   const number = Number(value);
   return Number.isFinite(number) && number > 0 ? number : fallback;
@@ -50,6 +55,19 @@ export function calculatePickupQuote(booking: Record<string, unknown>): PickupQu
     addOns: Number(addOns.toFixed(2)),
     total: Number(total.toFixed(2)),
   };
+}
+
+export function validatePickupBooking(booking: Record<string, unknown>): BookingValidation {
+  const requiredFields = ['fullName', 'phone', 'email', 'pickupAddress', 'zipCode', 'pickupWindow'];
+  const missing = requiredFields.find((field) => !String(booking[field] ?? '').trim());
+  if (missing) return { ok: false, message: 'Please complete all required pickup details.' };
+  if (booking.policyConsent !== 'on') return { ok: false, message: 'Please agree to the required policies before submitting your pickup request.' };
+  if (!/^\S+@\S+\.\S+$/.test(String(booking.email).trim())) return { ok: false, message: 'Please enter a valid email address.' };
+  if (!/^\d{5}$/.test(String(booking.zipCode).trim())) return { ok: false, message: 'Please enter a valid 5-digit ZIP code.' };
+  const selectedWeight = String(booking.estimatedWeight || '');
+  const weight = selectedWeight === 'custom' ? Number(booking.customWeight) : Number(selectedWeight);
+  if (!Number.isFinite(weight) || weight <= 0 || weight > 1000) return { ok: false, message: 'Please enter a laundry estimate between 1 and 1,000 pounds.' };
+  return { ok: true };
 }
 
 const fallbackPlans: SubscriptionPlan[] = [
@@ -203,8 +221,8 @@ export async function submitPickupBooking(booking: Record<string, unknown>) {
 
   if (!accessToken || !siteId) {
     return {
-      ok: true,
-      message: 'Thanks! Your pickup request was captured. Configure Wix CMS to store bookings in a collection.',
+      ok: false,
+      message: 'Wix booking storage is not configured yet. Please contact us while the booking connection is being completed.',
       mode: 'fallback' as const,
     };
   }
@@ -220,8 +238,10 @@ export async function submitPickupBooking(booking: Record<string, unknown>) {
       body: JSON.stringify({
         item: {
           ...booking,
-          status: 'new',
+          policyConsent: undefined,
+          policyConsentAt: new Date().toISOString(),
           submittedAt: new Date().toISOString(),
+          status: 'new',
           source: 'fresh-fold-site',
         },
         collectionId: collectionName,
@@ -232,9 +252,12 @@ export async function submitPickupBooking(booking: Record<string, unknown>) {
       throw new Error(`Wix booking submission failed with ${response.status}`);
     }
 
+    const payload = await response.json();
+
     return {
       ok: true,
       message: 'Thanks! Your pickup request was sent to your Wix-connected booking collection.',
+      bookingId: String(payload?.item?._id ?? ''),
       mode: 'wix' as const,
     };
   } catch (error) {

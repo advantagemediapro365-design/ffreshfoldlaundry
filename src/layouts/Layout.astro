@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
 	title?: string;
@@ -78,6 +79,7 @@ const schema = {
 			<slot />
 		</main>
 		<Footer />
+		<CookieConsent />
 		<a
 			href="https://wa.me/15704947523?text=Hi%20Fresh%20Fold%20Delivery%2C%20I%20would%20like%20to%20connect%20with%20you%20about%20laundry%20service."
 			class="whatsapp-float"

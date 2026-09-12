@@ -190,12 +190,22 @@ const services = [
   );
   const zipResult = zipForm?.querySelector<HTMLElement>(".zipbox-result");
 
-  zipForm?.addEventListener("submit", (event) => {
+  zipForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!zipInput || !zipResult) return;
     const zip = zipInput.value.trim();
-    const availability = getZipAvailability(zip);
-    zipResult.textContent = `${availability.label}: ${availability.summary}`;
+    zipResult.textContent = "Checking your ZIP code...";
+    try {
+      const response = await fetch(
+        `/api/service-area?zip=${encodeURIComponent(zip)}`,
+      );
+      if (!response.ok) throw new Error("ZIP check failed");
+      const availability = await response.json();
+      zipResult.textContent = `${availability.label}: ${availability.summary}`;
+    } catch {
+      zipResult.textContent =
+        "We could not check your ZIP code right now. Please call 570-494-7523.";
+    }
   });
 </script>
 <style>

@@ -8,15 +8,16 @@ Make subscriptions and pickup booking work reliably so customers can start servi
 ## Current Status
 - Subscription pages and booking CTAs are present.
 - The pickup flow exists as a multi-step UI on the site.
-- The current booking form is a front-end mockup and does not yet submit real booking data.
+- The booking form now posts to `/api/book-pickup`, validates required fields, consent, and service-area status, calculates the quote on the server, and writes to the Wix `pickupBookings` collection when deployment credentials are configured.
+- Production Wix storage still requires owner configuration of `WIX_SITE_ID`, `WIX_API_TOKEN`, and the `pickupBookings` collection permissions.
 
 ## Launch Requirements
 
 ### 1. Functional Booking Flow
 - Customers can choose a plan or one-time pickup.
 - Customers can enter contact details, address, ZIP, pickup timing, and laundry preferences.
-- The booking form submits successfully.
-- A confirmation message or email is shown after submission.
+- The booking form submits to the server endpoint and rejects incomplete or unavailable requests.
+- Wix-backed requests receive a booking reference before payment redirect; payment/email confirmation configuration remains a deployment task.
 
 ### 2. Subscription Flow
 - Each subscription CTA routes to the correct booking experience.
@@ -42,10 +43,12 @@ Make subscriptions and pickup booking work reliably so customers can start servi
 ## Implementation Plan
 
 ### Phase 1 — Make the Booking Form Functional
-- Add real form submission handling for the pickup booking page.
-- Capture the fields needed for a booking request.
-- Send the submission to an email, CRM, or backend endpoint.
-- Display a clear success/error message.
+- [x] Add real form submission handling for the pickup booking page.
+- [x] Capture the fields needed for a booking request.
+- [x] Send the submission to the Wix CMS backend endpoint.
+- [x] Display a clear server error state when validation or Wix storage fails.
+- [ ] Configure Wix credentials and collection permissions in the deployment environment.
+- [ ] Add confirmed email/notification automation after Wix insertion.
 
 ### Phase 2 — Connect Subscription CTAs
 - Pass the selected subscription plan into the booking journey.
@@ -53,11 +56,13 @@ Make subscriptions and pickup booking work reliably so customers can start servi
 - Make the flow feel like a true start-service experience.
 
 ### Phase 3 — Add Service Area Logic
-- Add ZIP-based availability validation.
-- Show either a booking path or a waitlist message.
-- Make the experience clear for unsupported areas.
+- [x] Add ZIP-based availability validation to booking submission.
+- [x] Keep unsupported ZIPs out of online booking and direct customers to contact/waitlist support.
+- [ ] Add a dedicated waitlist submission endpoint and Wix collection.
 
 ### Phase 4 — Pre-Launch QA
+- [ ] Test a Wix-backed booking end to end with production-like credentials.
+- [ ] Confirm payment redirect receives only quote, plan, and booking reference.
 - Test all CTA buttons on desktop and mobile.
 - Test booking submission from each plan.
 - Test service-area edge cases.

@@ -9,6 +9,7 @@ function getPages() {
 	{ slug: 'delivery-route-policy', type: 'Policy', title: 'Delivery & Route Policy | Fresh Fold Delivery', h1: 'Delivery & Route Policy', cta: 'Book Pickup', description: 'Review Fresh Fold Delivery route, delivery, mileage, availability, and pickup policies for laundry pickup and delivery service.' },
 	{ slug: 'terms-of-service', type: 'Policy', title: 'Terms of Service | Fresh Fold Delivery', h1: 'Terms of Service', cta: 'Book Pickup', description: 'Review Fresh Fold Delivery terms of service for laundry pickup, wash dry fold, delivery, subscriptions, and commercial requests.' },
 	{ slug: 'privacy-policy', type: 'Policy', title: 'Privacy Policy | Fresh Fold Delivery', h1: 'Privacy Policy', cta: 'Contact Support', description: 'Review the Fresh Fold Delivery privacy policy for customer information, booking details, communications, and service requests.' },
+	{ slug: 'cookie-policy', type: 'Policy', title: 'Cookie Policy | Fresh Fold Delivery', h1: 'Cookie Policy', cta: 'Contact Support', description: 'Review how Fresh Fold Delivery uses necessary cookies, local storage, analytics, and third-party embeds.' },
 	{ slug: 'refund-damage-policy', type: 'Policy', title: 'Refund & Damage Policy | Fresh Fold Delivery', h1: 'Refund, Damage & Rewash Policy', cta: 'Contact Support', description: 'Review Fresh Fold Delivery refund, damage, rewash, and issue-resolution policies for laundry pickup and delivery orders.' },
 	{ slug: 'subscription-policy', type: 'Policy', title: 'Laundry Subscription Policy | Fresh Fold Delivery', h1: 'Subscription Policy', cta: 'Start Subscription', description: 'Review Fresh Fold Delivery subscription rules, billing expectations, route availability, pauses, and delivery exclusions.' },
 	{ slug: 'pocket-heavy-soil-policy', type: 'Policy', title: 'Pocket & Heavy Soil Laundry Policy | Fresh Fold Delivery', h1: 'Pocket, Heavy Soil & Special-Care Policy', cta: 'Book Pickup', description: 'Review Fresh Fold Delivery policies for pockets, heavy soil, pet hair, special-care laundry, and customer preparation responsibilities.' },
@@ -41,6 +42,7 @@ if (!page) {
 
 const isPolicy = page.type === 'Policy';
 const isCommercial = page.type === 'Commercial';
+const isCookiePolicy = page.slug === 'cookie-policy';
 ---
 
 <Layout title={page.title} description={page.description} canonicalPath={`/${page.slug}`}>
@@ -61,9 +63,21 @@ const isCommercial = page.type === 'Commercial';
 			{isPolicy ? (
 				<>
 					<h2>Policy Summary</h2>
-					<p>This page is the public policy location for {page.h1.toLowerCase()}. It should be reviewed before checkout and linked from the footer, booking flow, and any related customer support messages.</p>
-					<p>Fresh Fold Delivery separates laundry processing, delivery, mileage, tips, add-ons, specialty items, bag deposits, missed pickup fees, redelivery fees, and commercial custom quotes unless a specific written offer says otherwise.</p>
-					<p>Customers should remove pocket items, identify special-care laundry, disclose heavy soil or pet hair, and contact support quickly if an order needs review.</p>
+					{isCookiePolicy ? (
+						<>
+							<p>Fresh Fold Delivery currently uses local storage only to remember your cookie-consent choice. No analytics or advertising scripts are enabled on this site.</p>
+							<h2>Third-Party Content</h2>
+							<p>Some pages include an OpenStreetMap map embed. The map provider may process connection data when the map loads. You can avoid the embed by not loading the service-area map.</p>
+							<h2>Your Choice</h2>
+							<p>You can reject optional cookies in the consent banner. Necessary site functionality may still operate. This draft should be reviewed with the business's legal adviser before publication.</p>
+						</>
+					) : (
+						<>
+							<p>This page is the public policy location for {page.h1.toLowerCase()}. It should be reviewed before checkout and linked from the footer, booking flow, and any related customer support messages.</p>
+							<p>Fresh Fold Delivery separates laundry processing, delivery, mileage, tips, add-ons, specialty items, bag deposits, missed pickup fees, redelivery fees, and commercial custom quotes unless a specific written offer says otherwise.</p>
+							<p>Customers should remove pocket items, identify special-care laundry, disclose heavy soil or pet hair, and contact support quickly if an order needs review.</p>
+						</>
+					)}
 				</>
 			) : isCommercial ? (
 				<>
