@@ -279,3 +279,51 @@ export async function submitPickupBooking(booking: Record<string, unknown>) {
     };
   }
 }
+
+export function validateContactMessage(message: Record<string, unknown>) {
+  const requiredFields = ['fullName', 'phone', 'email', 'message'];
+  const missing = requiredFields.find((field) => !String(message[field] ?? '').trim());
+  if (missing) return { ok: false, message: 'Please complete your name, phone, email, and message.' };
+  if (message.contactConsent !== 'on') return { ok: false, message: 'Please agree to let Fresh Fold use your details to reply.' };
+  if (!/^\S+@\S+\.\S+$/.test(String(message.email).trim())) return { ok: false, message: 'Please enter a valid email address.' };
+  return { ok: true };
+}
+
+export async function submitContactMessage(message: Record<string, unknown>) {
+  const collectionName = String(import.meta.env.WIX_CONTACT_MESSAGES_COLLECTION || 'contactMessages');
+  const accessToken = String(import.meta.env.WIX_API_TOKEN || import.meta.env.WIX_ACCESS_TOKEN || import.meta.env.WIX_API_KEY || '');
+  const siteId = String(import.meta.env.WIX_SITE_ID || '');
+
+  if (!accessToken || !siteId) {
+    return { ok: false, message: 'Contact storage is not configured yet. Please call or email us directly.' };
+  }
+
+  try {
+    const receivedAt = new Date().toISOString();
+    const data = {
+      fullName: String(message.fullName ?? '').trim(),
+      phone: String(message.phone ?? '').trim(),
+      email: String(message.email ?? '').trim(),
+      servicePreference: String(message.servicePreference ?? '').trim(),
+      contactPreference: String(message.contactPreference ?? '').trim(),
+      city: String(message.city ?? '').trim(),
+      questionType: String(message.questionType ?? '').trim(),
+      message: String(message.message ?? '').trim(),
+      contactConsentAt: receivedAt,
+      receivedAt,
+      status: 'new',
+      source: 'fresh-fold-site',
+    };
+    const response = await fetch('https://www.wixapis.com/wix-data/v2/items', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}`, 'wix-site-id': siteId },
+      body: JSON.stringify({ dataCollectionId: collectionName, dataItem: { data } }),
+    });
+    if (!response.ok) throw new Error(`Wix contact submission failed with ${response.status}`);
+    const payload = await response.json();
+    return { ok: true, message: 'Thanks! Your message was sent. We will get back to you shortly.', messageId: String(payload?.dataItem?.id ?? '') };
+  } catch (error) {
+    console.error('Unable to submit contact message to Wix', error);
+    return { ok: false, message: 'We could not send your message right now. Please call or email us directly.' };
+  }
+}

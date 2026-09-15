@@ -241,23 +241,22 @@ import Layout from '../layouts/Layout.astro';
 	<script>
 		const contactForm = document.querySelector<HTMLFormElement>('#contact-form');
 		const contactStatus = document.querySelector<HTMLElement>('#contact-status');
-		contactForm?.addEventListener('submit', (event) => {
+		contactForm?.addEventListener('submit', async (event) => {
 			event.preventDefault();
 			const data = new FormData(contactForm);
-			const subject = `Website inquiry from ${data.get('full-name')}`;
-			const body = [
-				`Name: ${data.get('full-name')}`,
-				`Phone: ${data.get('phone')}`,
-				`Email: ${data.get('email')}`,
-				`City: ${data.get('city') || 'Not provided'}`,
-				`Question type: ${data.get('question-type')}`,
-				`Service preference: ${data.get('servicePreference')}`,
-				`Preferred reply: ${data.get('contactPreference')}`,
-				'',
-				`Message: ${data.get('message')}`,
-			].join('\n');
-			window.location.href = `mailto:info@freshfoldaltoona.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-			if (contactStatus) contactStatus.textContent = 'Your email app is opening with the message details addressed to info@freshfoldaltoona.com.';
+			const submitButton = contactForm.querySelector<HTMLButtonElement>('button[type="submit"]');
+			if (submitButton) submitButton.disabled = true;
+			if (contactStatus) contactStatus.textContent = 'Sending your message...';
+			try {
+				const response = await fetch('/api/contact', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+				const result = await response.json();
+				if (contactStatus) contactStatus.textContent = result.message;
+				if (response.ok) contactForm.reset();
+			} catch {
+				if (contactStatus) contactStatus.textContent = 'We could not send your message right now. Please call or email us directly.';
+			} finally {
+				if (submitButton) submitButton.disabled = false;
+			}
 		});
 	</script>
 
