@@ -184,7 +184,7 @@ export async function getSubscriptionPlans(): Promise<SubscriptionPlan[]> {
   }
 
   try {
-    const response = await fetch('https://www.wixapis.com/wix-data/v1/items/query', {
+    const response = await fetch('https://www.wixapis.com/wix-data/v2/items/query', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -192,8 +192,9 @@ export async function getSubscriptionPlans(): Promise<SubscriptionPlan[]> {
         'wix-site-id': siteId,
       },
       body: JSON.stringify({
+        dataCollectionId: collectionName,
         query: {
-          collectionId: collectionName,
+          paging: { limit: 100 },
         },
       }),
     });
@@ -203,9 +204,12 @@ export async function getSubscriptionPlans(): Promise<SubscriptionPlan[]> {
     }
 
     const payload = await response.json();
-    const items = Array.isArray(payload?.items) ? payload.items : [];
+    const items = Array.isArray(payload?.dataItems) ? payload.dataItems : [];
     if (items.length > 0) {
-      return items.map((item, index) => normalizePlan(item as Record<string, unknown>, index));
+      return items.map((item, index) => {
+        const dataItem = item && typeof item === 'object' && 'data' in item ? (item as Record<string, unknown>).data as Record<string, unknown> : item as Record<string, unknown>;
+        return normalizePlan(dataItem, index);
+      });
     }
   } catch (error) {
     console.error('Unable to load Wix subscription plans', error);
@@ -228,7 +232,18 @@ export async function submitPickupBooking(booking: Record<string, unknown>) {
   }
 
   try {
-    const response = await fetch('https://www.wixapis.com/wix-data/v1/items', {
+    const createdAt = new Date().toISOString();
+    const payloadBody = {
+      ...booking,
+      customerType: String(booking.customerType ?? booking.customer_type ?? 'residential'),
+      policyConsent: undefined,
+      policyConsentAt: createdAt,
+      submittedAt: createdAt,
+      status: 'new',
+      source: 'fresh-fold-site',
+    };
+
+    const response = await fetch('https://www.wixapis.com/wix-data/v2/items', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -236,15 +251,10 @@ export async function submitPickupBooking(booking: Record<string, unknown>) {
         'wix-site-id': siteId,
       },
       body: JSON.stringify({
-        item: {
-          ...booking,
-          policyConsent: undefined,
-          policyConsentAt: new Date().toISOString(),
-          submittedAt: new Date().toISOString(),
-          status: 'new',
-          source: 'fresh-fold-site',
+        dataCollectionId: collectionName,
+        dataItem: {
+          data: payloadBody,
         },
-        collectionId: collectionName,
       }),
     });
 
@@ -257,7 +267,7 @@ export async function submitPickupBooking(booking: Record<string, unknown>) {
     return {
       ok: true,
       message: 'Thanks! Your pickup request was sent to your Wix-connected booking collection.',
-      bookingId: String(payload?.item?._id ?? ''),
+      bookingId: String(payload?.dataItem?.id ?? ''),
       mode: 'wix' as const,
     };
   } catch (error) {
