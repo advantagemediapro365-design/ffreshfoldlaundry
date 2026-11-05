@@ -16,5 +16,6 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const result = await submitContactMessage(normalized);
-  return new Response(JSON.stringify(result), { status: result.ok ? 200 : 502, headers: { 'Content-Type': 'application/json' } });
+  const status = result.ok ? 200 : result.mode === 'unconfigured' ? 503 : 502;
+  return new Response(JSON.stringify(result), { status, headers: { 'Content-Type': 'application/json' } });
 };

@@ -22,11 +22,25 @@ const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const schema = {
 	'@context': 'https://schema.org',
 	'@type': 'LocalBusiness',
-	name: 'Fresh Fold Laundry Delivery Altoona',
+	name: 'FreshFold Altoona',
 	url: siteUrl,
 	telephone: '+1-570-494-7523',
 	email: 'info@freshfoldaltoona.com',
 	areaServed: ['Altoona PA', 'State College PA', 'Lock Haven PA', 'Blair County PA', 'Central Pennsylvania'],
+	openingHoursSpecification: [
+		{
+			'@type': 'OpeningHoursSpecification',
+			dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+			opens: '07:00',
+			closes: '19:00',
+		},
+		{
+			'@type': 'OpeningHoursSpecification',
+			dayOfWeek: 'Saturday',
+			opens: '08:00',
+			closes: '14:00',
+		},
+	],
 	contactPoint: { '@type': 'ContactPoint', telephone: '+1-570-494-7523', email: 'info@freshfoldaltoona.com', contactType: 'customer service' },
 	description,
 	priceRange: '$$',

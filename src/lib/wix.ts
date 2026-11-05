@@ -295,7 +295,11 @@ export async function submitContactMessage(message: Record<string, unknown>) {
   const siteId = String(import.meta.env.WIX_SITE_ID || '');
 
   if (!accessToken || !siteId) {
-    return { ok: false, message: 'Contact storage is not configured yet. Please call or email us directly.' };
+    return {
+      ok: false,
+      message: 'Contact storage is not configured yet. Please call or email us directly.',
+      mode: 'unconfigured' as const,
+    };
   }
 
   try {
@@ -321,9 +325,13 @@ export async function submitContactMessage(message: Record<string, unknown>) {
     });
     if (!response.ok) throw new Error(`Wix contact submission failed with ${response.status}`);
     const payload = await response.json();
-    return { ok: true, message: 'Thanks! Your message was sent. We will get back to you shortly.', messageId: String(payload?.dataItem?.id ?? '') };
+    return { ok: true, message: 'Thanks! Your message was sent. We will get back to you shortly.', messageId: String(payload?.dataItem?.id ?? ''), mode: 'wix' as const };
   } catch (error) {
     console.error('Unable to submit contact message to Wix', error);
-    return { ok: false, message: 'We could not send your message right now. Please call or email us directly.' };
+    return {
+      ok: false,
+      message: 'We could not send your message right now. Please call or email us directly.',
+      mode: 'error' as const,
+    };
   }
 }
